@@ -1,0 +1,57 @@
+<%- include("./fragments/head") %>
+
+<body>
+
+  <h2>SETTINGS!</h1>
+
+    <p>¿Cómo te gustaría dividir tu presupuesto?</p>
+
+    <form action="/settings/save" method="POST">
+
+      <% if (settings.length !== 0) { %>
+      <table>
+        <tr>
+          <th>N°</th>
+          <th>Nombre categoría</th>
+          <th>Porcentaje asignado</th>
+          <th></th>
+          <th></th>
+        </tr>
+        <% for( let i = 0; i < settings.length; i++ ) { %>
+        <tr>
+          <td><%= i + 1 %></td>
+          <td><%= settings[i].catName %></td>
+          <td><%= settings[i].catPerc %></td>
+          <td><span id="btnEditar" onclick="editar('<%= settings[i]._id %>', '<%= settings[i].catName %>', '<%= settings[i].catPerc %>')">editar</span></td>
+          <td>
+            <a href="/settings/quitar-cat/<%= settings[i]._id %>">
+              quitar
+            </a>
+          </td>
+        </tr>
+        <% } %>
+
+      </table>
+      <% } %>
+
+      <div class="itemSettings">
+        <input type="text" name="catName" placeholder="Nombre de la categoría" autofocus>
+        <div>
+          <input type="number" name="catPerc" item-percentage placeholder="Porcentaje a asignar">%
+        </div>
+      </div>
+
+      <button type="submit">
+        Aceptar
+      </button>
+    </form>
+    <a href="/main">
+      <button type="button">
+        Avanzar
+      </button>
+    </a>
+
+    <%- include("./fragments/scripts") %>
+</body>
+
+</html>

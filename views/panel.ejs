@@ -1,0 +1,24 @@
+<%- include("./fragments/head") %>
+
+<body>
+  
+  <%- include("./fragments/navbar") %>
+
+  <h1>Bienvenido al panel de Smart Wallet</h1>
+
+  <div>
+    <a href="/nuevo-ingreso">
+      Nuevo ingreso
+    </a>
+  </div>
+
+  <div>
+    <a href="/nuevo-egreso/<%= user._id %>">
+      Nuevo egreso
+    </a>
+  </div>
+
+  <%- include("./fragments/scripts") %>
+</body>
+
+</html>

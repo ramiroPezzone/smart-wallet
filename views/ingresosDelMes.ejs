@@ -1,0 +1,65 @@
+<%- include("./fragments/head") %>
+
+<body>
+
+  <%- include("./fragments/navbar") %>
+
+  <h1>Ingresos del mes</h1>
+
+  <div>
+    <a href="/ingresos-del-mes/0">Enero</a>
+    <a href="/ingresos-del-mes/1">Febrero</a>
+    <a href="/ingresos-del-mes/2">Marzo</a>
+    <a href="/ingresos-del-mes/3">Abril</a>
+    <a href="/ingresos-del-mes/4">Mayo</a>
+    <a href="/ingresos-del-mes/5">Junio</a>
+    <a href="/ingresos-del-mes/6">Julio</a>
+    <a href="/ingresos-del-mes/7">Agosto</a>
+    <a href="/ingresos-del-mes/8">Septiembre</a>
+    <a href="/ingresos-del-mes/9">Octubre</a>
+    <a href="/ingresos-del-mes/10">Noviembre</a>
+    <a href="/ingresos-del-mes/11">Diciembre</a>
+  </div>
+
+  <table>
+    <tr>
+      <th>N°</th>
+      <th>Día</th>
+      <th>Concepto</th>
+      <th>Monto</th>
+      <th>Obs</th>
+    </tr>
+
+    <% if (ingresos.length === 0) { %>
+    <tr>
+      <td colspan="5">No se registran ingresos en este período</td>
+    </tr>
+    <% } else { %>
+    <% for( let i = 0; i < ingresos.length; i++ ) { %>
+    <tr>
+      <td><%= i + 1 %></td>
+      <td><%= ingresos[i].date %></td>
+      <td><%= ingresos[i].concept %></td>
+      <td>$ <%= ingresos[i].value %></td>
+      <% if (ingresos[i].obs === "") { %>
+      <td>-</th>
+        <% } else {%>
+      <td><%= ingresos[i].obs %></td>
+      <% } %>
+    </tr>
+    <% } %>
+    <% } %>
+  </table>
+
+  <% let totalIngresos = []; %>
+  <% ingresos.forEach(monto => { %>
+  <% totalIngresos = [...totalIngresos, monto.value]%>
+  <% }) %>
+  <% let resultado = totalIngresos.reduce((prev, curr) => prev + curr, 0 )%>
+
+  <p>Total de ingresos: $ <span><%= resultado %></span></p>
+
+  <%- include("./fragments/scripts") %>
+</body>
+
+</html>
