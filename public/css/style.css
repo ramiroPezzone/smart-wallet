@@ -46,10 +46,8 @@
   align-items: center;
   flex-direction: column;
 }
-
 .retribucion {
   width: max-content;
-  /* text-decoration: none; */
   color: var(--eggplant);
   font-size: .8rem;
   width: 300px;
@@ -58,7 +56,6 @@
 .retribucion:a {
   cursor: pointer;
 }
-
 .logo-pantalla-principal {
   height: 40vh;
 }
