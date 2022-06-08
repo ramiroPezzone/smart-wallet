@@ -2,7 +2,7 @@ require("dotenv").config();
 const MongoStore = require("connect-mongo");
 const express = require("express");
 const app = express();
-const port = process.env.port;
+const port = process.env.PORT;
 const passport = require("passport");
 const connectDB = require("./config/db");
 const MONGODB_URI = process.env.MONGODB_URI;
