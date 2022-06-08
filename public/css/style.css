@@ -17,7 +17,7 @@
 }
 .container-index {
   background-color: var(--marigold);
-  height: calc(100vh - 10vh);
+  height: calc(100vh - 12vh);
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
