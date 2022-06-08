@@ -43,6 +43,20 @@
 .container-logo-pantalla-principal {
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.retribucion {
+  width: max-content;
+  /* text-decoration: none; */
+  color: var(--eggplant);
+  font-size: .8rem;
+  width: 300px;
+  text-align: right;
+}
+.retribucion:a {
+  cursor: pointer;
 }
 
 .logo-pantalla-principal {
@@ -82,6 +96,8 @@
   width: 25px;
   height: 25px;
 }
+
+
 
 .container-mi-cuenta {
   margin-right: 60px;
