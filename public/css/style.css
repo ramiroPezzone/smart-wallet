@@ -10,19 +10,23 @@
   --primary-font: "Prata", serif;
   --styled-font: "Rouge Script", cursive;
 }
-
 * {
   padding: 0;
   margin: 0;
 }
-.container-index {
+.body {
   background-color: var(--marigold);
-  height: calc(100vh - 14vh);
+  min-height: calc(100vh - 14vh);
+  font-family: var(--primary-font);
+  color: var(--royal-blue-dark);
+}
+
+/* Página de login */
+.container-index {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
 }
-
 .container-titulo-pantalla-principal {
   color: var(--eggplant);
 }
@@ -33,7 +37,8 @@
   font-family: var(--primary-font);
 }
 
-.titulo-smart-wallet {
+.titulo-smart-wallet,
+.brand-bienvenida {
   text-align: center;
   font-size: 3rem;
   font-weight: bold;
@@ -49,14 +54,15 @@
 .retribucion {
   width: max-content;
   color: var(--eggplant);
-  font-size: .8rem;
+  font-size: 0.8rem;
   width: 300px;
   text-align: right;
 }
 .retribucion:a {
   cursor: pointer;
 }
-.logo-pantalla-principal {
+.logo-pantalla-principal,
+.img-wallito {
   height: 40vh;
 }
 
@@ -94,7 +100,92 @@
   height: 25px;
 }
 
+/* Página de bienvenida */
+.body-bienvenida {
+  text-align: center;
+  font-size: 1.1rem;
+  padding: 15px;
+}
+.container-saludo-de-bienvenida p {
+  font-size: 1.2rem;
+}
+.before-begin-msg {
+  width: 345px;
+  margin: 0 auto;
+}
+/* Button VAMOS */
+/* From uiverse.io by @adamgiebl */
+.container-btn-lets-go {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+.btn-lets-go {
+  text-decoration: none;
+  text-align: center;
+  width: max-content;
+}
+.cssbuttons-io-button {
+  background: var(--eggplant);
+  color: white;
+  font-family: inherit;
+  padding: 0.35em;
+  padding-left: 1.2em;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 0.9em;
+  border: none;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  box-shadow: inset 0 0 1.6em -0.6em var(--eggplant);
+  overflow: hidden;
+  position: relative;
+  height: 2.8em;
+  padding-right: 3.3em;
+}
 
+.cssbuttons-io-button .icon {
+  background: white;
+  margin-left: 1em;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.2em;
+  width: 2.2em;
+  border-radius: 0.7em;
+  box-shadow: 0.1em 0.1em 0.6em 0.2em var(--eggplant);
+  right: 0.3em;
+  transition: all 0.3s;
+}
+
+.cssbuttons-io-button:hover .icon {
+  width: calc(100% - 0.6em);
+}
+
+.cssbuttons-io-button .icon svg {
+  width: 1.1em;
+  transition: transform 0.3s;
+  color: var(--eggplant);
+}
+
+.cssbuttons-io-button:hover .icon svg {
+  transform: translateX(0.1em);
+}
+
+.cssbuttons-io-button:active .icon {
+  transform: scale(0.95);
+}
+
+/*  */
+
+.container-img-wallito {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 
 .container-mi-cuenta {
   margin-right: 60px;

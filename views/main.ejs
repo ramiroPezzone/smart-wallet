@@ -1,14 +1,34 @@
 <%- include("./fragments/head") %>
 
-<body>
+<body class="body-bienvenida body">
 
-  <h1>¡Hola <%= user.firstName %>, bienvenido a Smart Wallet!</h1>
+  <div class="container-saludo-de-bienvenida">
+    <p>¡Hola <%= user.firstName%>!</p>
+    <p>Te doy la bienvenida a</p>
+    <h1 class="brand-bienvenida">Smart Wallet</h1>
+  </div>
 
-  <p>Voy a hacerte algunas preguntas para que juntos podamos gestionar tus finanzas de la mejor manera</p>
+  <p class="before-begin-msg">Antes de comenzar tenemos que definir las categorías que usaremos luego</p>
+
+  <div class="container-img-wallito">
+    <img src="/imgs/wallito.png" alt="img-wallito" class="img-wallito">
+  </div>
+
 
   <P>¿Empezamos?</P>
 
-  <a href="/settings">VAMOS!</a>
+  <div class="container-btn-lets-go">
+    <a href="/settings" class="btn-lets-go">
+      <button class="cssbuttons-io-button"> ¡VAMOS!
+        <div class="icon">
+          <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
+          </svg>
+        </div>
+      </button>
+    </a>
+  </div>
 
   <%- include("./fragments/scripts") %>
 </body>
