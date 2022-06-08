@@ -5,7 +5,7 @@ const editar = (id, nameCat, percCat) => {
   <div class="childToRemove">
    <div class="modal-header">
    <h5 class="modal-title">Editando ${nameCat}</h5>
-   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="quitarElementoHTML()"></button>
  </div>
  <div class="separador-modal">
  </div>
