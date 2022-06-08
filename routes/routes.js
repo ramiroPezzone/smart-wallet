@@ -3,8 +3,6 @@ const router = express.Router();
 const go = require("../controllers/controllers");
 const { ensureGuest, ensureAuth } = require("../middleware/auth");
 
-router.get("/", ensureGuest, go.root);
-
 router.get("/main", ensureAuth, go.main);
 
 router.get("/settings", ensureAuth, go.settings);

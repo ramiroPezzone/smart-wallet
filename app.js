@@ -7,7 +7,7 @@ const passport = require("passport");
 const connectDB = require("./config/db");
 const MONGODB_URI = process.env.MONGODB_URI;
 const session = require("express-session");
-const routes = require("./routes/index");
+const routes = require("./routes/routes");
 const authRoutes = require("./routes/auth");
 const path = require("path");
 
@@ -45,5 +45,8 @@ app.listen(port, () => console.log(`Servidor en línea en el puerto ${port} ✔�
 app.use(express.static(path.join(__dirname, "public")));
 
 // Routes
+app.get("/", (req, res)=>{
+  res.render("index")
+});
 app.use("/", routes);
 app.use("/auth", authRoutes);

@@ -3,9 +3,6 @@ const ingresos = require("../models/ingresos");
 const Egresos = require("../models/egresos");
 
 const controllers = {
-  root: (req, res) => {
-    res.render("index.ejs");
-  },
   main: async (req, res) => {
     let user = req.user;
     let hasSettings = await UserSettings.findOne({ user: user._id });
