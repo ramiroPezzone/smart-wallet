@@ -1,5 +1,6 @@
 :root {
   --eggplant: #634c5eff;
+  --eggplant-2: #94708c;
   --sage: #d3c8a0ff;
   --emerald: #51d38cff;
   --catawba: #562931ff;
@@ -13,16 +14,20 @@
 * {
   padding: 0;
   margin: 0;
+  font-family: var(--primary-font);
+  color: var(--eggplant);
 }
 .body {
   background-color: var(--marigold);
   min-height: calc(100vh - 14vh);
   font-family: var(--primary-font);
   color: var(--royal-blue-dark);
+  text-align: center;
 }
 
 /* Página de login */
-.container-index {
+.container-index,
+.body-settings {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -106,6 +111,9 @@
   font-size: 1.1rem;
   padding: 15px;
 }
+.saludo-user {
+  font-weight: bold;
+}
 .container-saludo-de-bienvenida p {
   font-size: 1.2rem;
 }
@@ -115,12 +123,14 @@
 }
 /* Button VAMOS */
 /* From uiverse.io by @adamgiebl */
-.container-btn-lets-go {
+.container-btn-lets-go,
+.container-btn-avanzar {
   margin: 0 auto;
   display: flex;
   justify-content: center;
 }
-.btn-lets-go {
+.btn-lets-go,
+.btn-avanzar {
   text-decoration: none;
   text-align: center;
   width: max-content;
@@ -186,6 +196,111 @@
   align-items: center;
   flex-direction: column;
 }
+
+/* Settings page */
+
+.container-form-add-cat {
+  max-width: 350px;
+  margin: 0 auto;
+}
+.budget-ask {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+.container-add-btn {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Btn Add Cats */
+/* From uiverse.io by @adamgiebl */
+.cssbuttons-io-button-2 span {
+  color: white;
+}
+.cssbuttons-io-button-2 {
+  display: flex;
+  align-items: center;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 0.7em 1.4em 0.7em 1.1em;
+  background: var(--eggplant-2);
+  background: linear-gradient(0deg, var(--eggplant), var(--eggplant-2));
+  border: none;
+  box-shadow: 0 0.7em 1.5em -0.5em var(--eggplant);
+  letter-spacing: 0.05em;
+  border-radius: 20em;
+}
+
+.cssbuttons-io-button-2 svg {
+  margin-right: 6px;
+}
+
+.cssbuttons-io-button-2:hover {
+  box-shadow: 0 0.5em 1.5em -0.5em var(--eggplant);
+}
+
+.cssbuttons-io-button-2:active {
+  box-shadow: 0 0.3em 1em -0.5em var(--eggplant);
+}
+/*  */
+
+/* Btns de edición de cat */
+.btn-cancelar-cambios-cat span {
+  color: white;
+}
+.btn-cancelar-cambios-cat {
+  display: flex;
+  align-items: center;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 0.7em 1.4em 0.7em 1.1em;
+  background: var(--eggplant-2);
+  background: linear-gradient(0deg, var(--eggplant), var(--eggplant-2));
+  border: none;
+  box-shadow: 0 0.7em 1.5em -0.5em var(--eggplant);
+  letter-spacing: 0.05em;
+  border-radius: 20em;
+}
+
+.btn-cancelar-cambios-cat svg {
+  margin-right: 6px;
+}
+
+.btn-cancelar-cambios-cat:hover {
+  box-shadow: 0 0.5em 1.5em -0.5em var(--eggplant);
+}
+
+.btn-cancelar-cambios-cat:active {
+  box-shadow: 0 0.3em 1em -0.5em var(--eggplant);
+}
+/*  */
+
+.container-gral-table {
+  max-width: 350px;
+  margin: 0 auto;
+}
+.titulo-tabla-cat {
+  width: 360px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.table td {
+  color: var(--eggplant) !important;
+}
+
+.separador-modal {
+  margin: 10px;
+}
+.btn-mini-table {
+  cursor: pointer;
+}
+
+/*  */
 
 .container-mi-cuenta {
   margin-right: 60px;
