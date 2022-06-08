@@ -1,11 +1,22 @@
 <%- include("./fragments/head") %>
 
-<body>
+<body class="container-index">
 
-  <h1>Bienvenido a Smart Wallet</h1>
+  <div class="container-titulo-pantalla-principal">
+    <p class="titulo-pantalla-principal">Bienvenido a </p>
+    <h1 class="titulo-smart-wallet">Smart Wallet</h1>
+  </div>
 
-  <a href="/auth/google">
-    Inicia sesión con tu cuenta de google
+  <div class="container-logo-pantalla-principal">
+    <img src="/imgs/logo smart wallet.png" alt="logo-smart-wallet" class="logo-pantalla-principal">
+  </div>
+
+  <a href="/auth/google" class="link-login">
+    <div class="container-link-login">
+      <div class="container-logo-texto">
+        <span>Iniciá sesión con <span><img src="/imgs/google-logo.png" alt="logo Google" class="logo-google-login"></span>oogle</span>
+      </div>
+    </div>
   </a>
 
   <%- include("./fragments/scripts") %>

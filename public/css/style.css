@@ -1,5 +1,88 @@
+:root {
+  --eggplant: #634c5eff;
+  --sage: #d3c8a0ff;
+  --emerald: #51d38cff;
+  --catawba: #562931ff;
+  --dark-jungle-green: #0a2723ff;
+  --black: #000000ff;
+  --royal-blue-dark: #16266bff;
+  --marigold: #f1a921ff;
+  --primary-font: "Prata", serif;
+  --styled-font: "Rouge Script", cursive;
+}
+
 * {
   padding: 0;
   margin: 0;
 }
+.container-index {
+  background-color: var(--marigold);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
 
+.container-titulo-pantalla-principal {
+  color: var(--eggplant);
+}
+.titulo-pantalla-principal {
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: bold;
+  font-family: var(--primary-font);
+}
+
+.titulo-smart-wallet {
+  text-align: center;
+  font-size: 2.7rem;
+  font-weight: bold;
+  font-family: var(--styled-font);
+}
+
+.container-logo-pantalla-principal {
+  display: flex;
+  justify-content: center;
+}
+
+.logo-pantalla-principal {
+  height: 40vh;
+}
+
+.container-link-login {
+  margin: 0 auto;
+  width: 250px;
+  padding: 10px;
+  border: none;
+  outline: 2px solid var(--eggplant);
+  border-radius: 10px;
+}
+.container-link-login:hover {
+  outline: none;
+  background-color: var(--eggplant);
+}
+.container-link-login:hover > .container-logo-texto > span {
+  color: #fff;
+  font-weight: initial;
+  color: var(--marigold);
+}
+.link-login {
+  text-decoration: none;
+}
+.container-logo-texto {
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+  color: var(--eggplant);
+  font-family: var(--primary-font);
+  font-weight: bold;
+}
+
+.logo-google-login {
+  width: 25px;
+  height: 25px;
+}
+
+.container-mi-cuenta {
+  margin-right: 60px;
+}
