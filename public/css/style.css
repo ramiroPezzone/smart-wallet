@@ -2,13 +2,18 @@
   --eggplant: #634c5eff;
   --eggplant-2: #94708c;
   --sage: #d3c8a0ff;
-  --emerald: #51d38cff;
+  --emerald: rgb(89, 177, 63);
+  --emerald-2: rgb(133, 204, 52);
   --catawba: #562931ff;
   --dark-jungle-green: #0a2723ff;
   --black: #000000ff;
   --royal-blue-dark: #16266bff;
   --marigold: #f1a921ff;
-  --primary-font: "Prata", serif;
+  --red: rgb(255, 0, 0);
+  --red-2: rgba(255, 102, 0, 0.856);
+  --gray: rgb(126, 126, 126);
+  --gray-2: rgb(165, 165, 165);
+  --primary-font: "Tiro Gurmukhi", serif;
   --styled-font: "Rouge Script", cursive;
 }
 * {
@@ -233,15 +238,12 @@
   letter-spacing: 0.05em;
   border-radius: 20em;
 }
-
 .cssbuttons-io-button-2 svg {
   margin-right: 6px;
 }
-
 .cssbuttons-io-button-2:hover {
   box-shadow: 0 0.5em 1.5em -0.5em var(--eggplant);
 }
-
 .cssbuttons-io-button-2:active {
   box-shadow: 0 0.3em 1em -0.5em var(--eggplant);
 }
@@ -300,9 +302,161 @@
 .btn-mini-table {
   cursor: pointer;
 }
+.hidden {
+  display: none;
+}
+.is-valid {
+  outline: 3px solid var(--emerald);
+}
+.is-invalid {
+  outline: 3px solid var(--red);
+  animation: shake 300ms;
+}
+.msgErrorRepartijaDePresupuesto,
+.msgPresupuestoSuperado {
+  text-align: center;
+}
+.errorMsgInputName,
+.errorMsgInputPerc,
+.errorMsgEditName,
+.errorMsgEditPerc,
+.msgErrorRepartijaDePresupuesto,
+.msgPresupuestoSuperado {
+  color: var(--red);
+  text-align: left;
+  margin-top: 5px;
+  animation: shake 300ms;
+}
+.container-add-btn {
+  z-index: 1;
+}
+.cssbuttons-io-button-2:disabled {
+  background: var(--gray);
+  background: linear-gradient(0deg, var(--gray), var(--gray-2));
+  border: none;
+  box-shadow: 0 0.7em 1.5em -0.5em var(--gray);
+  letter-spacing: 0.05em;
+  border-radius: 20em;
+}
+.swal-button {
+  /* padding: 7px 19px;
+  border-radius: 20em;
+  background-color: var(--eggplant);
+  font-size: 1rem;
+  font-family: var(--primary-font);
+  border: 1px solid var(--eggplant);
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3); */
+  display: none;
+}
+.swal-title {
+  color: var(--eggplant);
+}
 
+@keyframes shake {
+  25% {
+    transform: translateX(4px);
+  }
+  50% {
+    transform: translateX(-4px);
+  }
+  75% {
+    transform: translateX(4px);
+  }
+}
 /*  */
 
+/* Pannel */
+.container-elements-body-pannel {
+  width: 100%;
+  height: calc(60vh);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.primera-linea-saludo-pannel {
+  font-size: 1.5rem;
+}
+.segunda-linea-saludo-pannel {
+  font-size: 1.2rem;
+}
+/* From uiverse.io by @adamgiebl */
+.btnAddIngreso,
+.btnAddEgreso {
+  display: flex;
+  width: 200px;
+  align-items: center;
+  justify-content: space-around;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 0.7em 1.4em 0.7em 1.1em;
+  color: white;
+  border: none;
+  letter-spacing: 0.05em;
+  border-radius: 20em;
+}
+.btnAddIngreso {
+  background: var(--emerald);
+  background: linear-gradient(0deg, var(--emerald), var(--emerald-2));
+  box-shadow: 0 0.7em 1.5em -0.5em var(--emerald);
+}
+.btnAddEgreso {
+  background: var(--red);
+  background: linear-gradient(0deg, var(--red), var(--red-2));
+  box-shadow: 0 0.7em 1.5em -0.5em var(--red);
+}
+
+.btnAddIngreso svg {
+  margin-right: 6px;
+}
+
+.btnAddIngreso:hover {
+  box-shadow: 0 0.5em 1.5em -0.5em var(--emerald);
+}
+
+.btnAddIngreso:active {
+  box-shadow: 0 0.3em 1em -0.5em var(--red);
+}
+.container-add-ingreso-pannel,
+.container-add-egreso-pannel {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.container-add-ingreso-pannel a,
+.container-add-egreso-pannel a {
+  text-decoration: none;
+}
+.container-add-ingreso-pannel span,
+.container-add-egreso-pannel span {
+  font-weight: bold;
+  color: #fff;
+}
+/*  */
+
+/* Navbar */
+.navbar-custom {
+  box-shadow: 0 0 20px 3px var(--eggplant);
+}
 .container-mi-cuenta {
   margin-right: 60px;
 }
+.container-data-user p {
+  padding: 0;
+  margin: 0;
+  font-size: 1.7rem;
+  font-weight: normal;
+  font-family: var(--styled-font);
+}
+.container-data-user {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 5px;
+}
+.foto-perfil-user-navbar {
+  border-radius: 50%;
+  width: 50px;
+}
+/*  */

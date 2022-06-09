@@ -18,6 +18,10 @@ const controllers = {
   },
   settingsSave: async (req, res) => {
     let { catName, catPerc } = req.body;
+    catName = catName.trim();
+    catName = catName[0].toUpperCase() + catName.slice(1);
+    catPerc = catPerc.trim();
+    catPerc = catPerc[0].toUpperCase() + catPerc.slice(1);
     let user = req.user._id;
     await UserSettings.create({
       user,

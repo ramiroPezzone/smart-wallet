@@ -1,22 +1,40 @@
 <%- include("./fragments/head") %>
 
-<body>
-  
+
+<body class="body body-pannel">
+
   <%- include("./fragments/navbar") %>
 
-  <h1>Bienvenido al panel de Smart Wallet</h1>
+  <div class="container-elements-body-pannel">
+    <div class="container-saludo-pannel">
+      <p class="primera-linea-saludo-pannel">¡Hola <%= user.nickName %>!</p>
+      <p class="segunda-linea-saludo-pannel">¿Que operación querés registrar?</p>
+    </div>
 
-  <div>
-    <a href="/nuevo-ingreso">
-      Nuevo ingreso
-    </a>
+    <div class="container-add-ingreso-pannel">
+      <a href="/nuevo-ingreso">
+        <button class="btnAddIngreso">
+          <span>Nuevo ingreso</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="#fff" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+          </svg>
+        </button>
+      </a>
+    </div>
+
+    <div class="container-add-egreso-pannel">
+      <a href="/nuevo-egreso/<%= user._id %>">
+        <button class="btnAddEgreso">
+          <span>Nuevo egreso</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="#fff" class="bi bi-dash-circle-fill" viewBox="0 0 16 16">
+            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-7z" />
+          </svg>
+        </button>
+      </a>
+    </div>
+
   </div>
 
-  <div>
-    <a href="/nuevo-egreso/<%= user._id %>">
-      Nuevo egreso
-    </a>
-  </div>
 
   <%- include("./fragments/scripts") %>
 </body>

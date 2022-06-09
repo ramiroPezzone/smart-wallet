@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-light">
+<nav class="navbar navbar-expand-lg navbar-custom">
   <div class="container-fluid">
     <a class="navbar-brand" href="/main">
       <img src="/imgs/logo smart wallet.png" alt="logo smart wallet" width="40">
@@ -29,6 +29,10 @@
                 Mi cuenta
               </a>
               <ul class="dropdown-menu container-options-mi-cuenta" aria-labelledby="navbarDropdownMenuLink">
+                <div class="container-data-user">
+                  <p class="name-in-navbar"><%= user.nickName %></p>
+                  <img src="<%= user.image %>" alt="foto perfil" class="foto-perfil-user-navbar">
+                </div>
                 <li><a class="dropdown-item" href="/auth/logout">Logout</a></li>
               </ul>
             </li>
