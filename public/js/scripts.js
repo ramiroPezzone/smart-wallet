@@ -185,7 +185,6 @@ if (d.querySelector("#isResseting")) {
   const customNavLink = d.querySelectorAll(".custom-nav-link");
   const logoNavbar = d.querySelector(".logo-navbar");
   let totalAsignado = d.querySelector(".total-asignado");
-  console.log(totalAsignado);
   totalAsignado = Number(totalAsignado.innerText);
   if (totalAsignado !== 100) {
     customNavLink.forEach((link) => {
@@ -225,7 +224,12 @@ if (d.querySelector(".btn-avanzar")) {
 }
 
 // Edit modal handler function
+var porcentajeActual;
+if (d.querySelector(".total-asignado")) {
+  porcentajeActual = Number(d.querySelector(".total-asignado").innerHTML);
+}
 const editar = (id, nameCat, percCat) => {
+  porcentajeActual = porcentajeActual - Number(percCat);
   let element = `
     <div class="childToRemove">
     <div class="modal-header">
@@ -244,14 +248,15 @@ const editar = (id, nameCat, percCat) => {
     <div class="form-floating">
     <input type="number" name="catPerc" class="form-control percInputEditCategory" id="floatingNumber" placeholder="Porcentaje" min="0" step="5" value="${percCat}">
     <label for="floatingNumber">Porcentaje</label>
-    <div class="hidden errorMsgEditPerc">El porcentaje asignado no puede quedar vacío</div>
+    <div class="hidden errorMsgEditPerc" style="margin-top: 10px;">El porcentaje asignado no puede quedar vacío</div>
+    <div class="hidden errorMsgPresupuestoSuperado" style="margin-top: 10px;">El total de porcentaje no debe superar el 100%</div>
     </div>
     </div>
     <div class="separador-modal">
     </div>
     <div class="modal-footer">
     <button type="button" class="btn-cancelar-cambios-cat" data-bs-dismiss="modal" onclick="quitarElementoHTML()">
-    <span>Cancelar</span>
+    <span class="span-btn-cancelar-cambios">Cancelar</span>
     </button>
     <button type="submit" class="btn-cancelar-cambios-cat">
     <span>Guardar cambios</span>
@@ -386,19 +391,27 @@ d.addEventListener("submit", (e) => {
 
   // Handler form Add category
   if (e.target.matches("#form-add-cat")) {
-    let totalAsignado = d.querySelector(".total-asignado");
-    totalAsignado = Number(totalAsignado.innerText);
+    let totalAsignado;
+    if (d.querySelector(".total-asignado")) {
+      totalAsignado = d.querySelector(".total-asignado");
+      totalAsignado = Number(totalAsignado.innerText);
+    }
+    let dataTr = d.querySelectorAll(".dataTr");
+
     const msgPresupuestoSuperado = d.querySelector(".msgPresupuestoSuperado");
     const containerTotalAsignado = d.querySelector(".container-total-asignado");
     let percInputAddCategory = d.querySelector(".percInputAddCategory");
+    const errorMsgNameRepetido = d.querySelector(".errorMsgNameRepetido");
     percInputAddCategory = Number(percInputAddCategory.value);
 
-    if (
-      totalAsignado !== null &&
-      totalAsignado + percInputAddCategory !== 100
-    ) {
+    if (totalAsignado + percInputAddCategory > 100) {
       msgPresupuestoSuperado.classList.remove("hidden");
       containerTotalAsignado.classList.add("error");
+      msgPresupuestoSuperado.classList.add("error");
+      return;
+    }
+    if (percInputAddCategory > 100) {
+      msgPresupuestoSuperado.classList.remove("hidden");
       msgPresupuestoSuperado.classList.add("error");
       return;
     }
@@ -425,6 +438,19 @@ d.addEventListener("submit", (e) => {
         return;
       }
     }
+
+    dataTr.forEach((data) => {
+      if (data.getAttribute("id") === nameInput[0].value) {
+        errorMsgNameRepetido.classList.remove("hidden");
+        errorMsgNameRepetido.classList.add("error");
+        nameInput[0].classList.add("is-invalid");
+      }
+    });
+
+    if(d.querySelector(".is-invalid")) {
+      return
+    }
+    
     swal({
       title: "Categoría agregada",
       icon: "success",
@@ -438,10 +464,21 @@ d.addEventListener("submit", (e) => {
 
   // Handler form Edit category
   if (e.target.matches("#form-edit-cat")) {
+    let totalAsignado = d.querySelector(".total-asignado");
+    totalAsignado = Number(totalAsignado.innerText);
+
+    let percInputEditCategory;
+    if (d.querySelector(".percInputEditCategory")) {
+      percInputEditCategory = d.querySelector(".percInputEditCategory");
+    }
+
     let editNameInput = d.getElementsByClassName("nameInputEditCategory"),
       editPercInput = d.getElementsByClassName("percInputEditCategory"),
       errorMsgEditName = d.querySelector(".errorMsgEditName"),
-      errorMsgEditPerc = d.querySelector(".errorMsgEditPerc");
+      errorMsgEditPerc = d.querySelector(".errorMsgEditPerc"),
+      errorMsgPresupuestoSuperado = d.querySelector(
+        ".errorMsgPresupuestoSuperado"
+      );
 
     if (editNameInput[0].value === "") {
       editNameInput[0].classList.add("is-invalid");
@@ -465,6 +502,16 @@ d.addEventListener("submit", (e) => {
       errorMsgEditPerc.classList.add("hidden");
       editPercInput[0].classList.add("is-valid");
     }
+
+    editPercInput = Number(editPercInput[0].value);
+
+    if (porcentajeActual + editPercInput > 100) {
+      errorMsgPresupuestoSuperado.classList.remove("hidden");
+      errorMsgPresupuestoSuperado.classList.add("error");
+      percInputEditCategory.classList.add("is-invalid");
+      return;
+    }
+
     swal({
       title: "Categoría editada",
       icon: "success",
@@ -611,5 +658,14 @@ d.addEventListener("click", (e) => {
     e.target.matches(".svg-comenzar")
   ) {
     location.href = "/settings";
+  }
+  if (
+    e.target.matches(".btn-cancelar-cambios-cat") ||
+    e.target.matches(".span-btn-cancelar-cambios")
+  ) {
+    const where = () => {
+      return d.querySelector(".navbar") ? "re-settings" : "settings";
+    };
+    location.href = where();
   }
 });

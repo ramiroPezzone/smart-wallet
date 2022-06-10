@@ -266,6 +266,15 @@ h6 {
   max-width: 350px;
   margin: 0 auto;
 }
+.container-msg-errors {
+  max-width: 350px;
+  margin: 0 auto;
+  font-size: 1.2rem;
+}
+.msgRepartijaDePresupuesto,
+.msgPresupuestoSuperado {
+  text-align: center !important;
+}
 .budget-ask {
   font-weight: bold;
   font-size: 1.2rem;

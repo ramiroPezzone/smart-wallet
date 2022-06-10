@@ -28,7 +28,7 @@
       </thead>
       <tbody>
         <% for( let i = 0; i < settings.length; i++ ) { %>
-        <tr>
+        <tr id="<%= settings[i].catName %>" class="dataTr">
           <td scope="row"><%= i + 1 %></td>
           <td><%= settings[i].catName %></td>
           <td><%= settings[i].catPerc %></td>
@@ -57,16 +57,19 @@
     <div class="container-total-asignado">
       <p>Total asignado: <span class="total-asignado"><%= resultado %></span><span>%</span></p>
     </div>
+  </div>
+  <% } %>
+  <div class="container-msg-errors">
     <div class="hidden msgRepartijaDePresupuesto">El 100% del presupuesto debe estar repartido entre las categorías</div>
     <div class="hidden msgPresupuestoSuperado">No puede superarse el 100% al repartir los porcentajes entre las categorías</div>
   </div>
-  <% } %>
 
   <form action="/settings/save" method="POST" id="form-add-cat">
     <div class="container-form-add-cat">
       <div class="form-floating mb-3 containerInputAddNameCat">
         <input type="text" name="catName" class="form-control nameInputAddCategory" id="floatingInput" placeholder="Nombre de la categoría">
         <label for="floatingInput">Nombre de la categoría</label>
+        <div class="hidden errorMsgNameRepetido">Los nombres de las categorías no deben repetirse</div>
         <div class="hidden errorMsgInputName">Debes colocar un nombre</div>
       </div>
       <div class="form-floating">
