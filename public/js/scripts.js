@@ -180,6 +180,50 @@ if (d.querySelector("#month-hidden")) {
   }
 }
 
+// Inhabilitación del navbar si modifica presupuesto en ressetings y es menor al 100%
+if (d.querySelector("#isResseting")) {
+  const customNavLink = d.querySelectorAll(".custom-nav-link");
+  const logoNavbar = d.querySelector(".logo-navbar");
+  let totalAsignado = d.querySelector(".total-asignado");
+  console.log(totalAsignado);
+  totalAsignado = Number(totalAsignado.innerText);
+  if (totalAsignado !== 100) {
+    customNavLink.forEach((link) => {
+      link.removeAttribute("href");
+      link.removeAttribute("data-bs-toggle");
+      link.classList.add("link-disabled");
+      link.setAttribute("style", "color: var(--gray-2) !important");
+    });
+    logoNavbar.setAttribute("style", "filter: grayscale(1)");
+  }
+}
+
+// btn Avanzar styler & inhabilitación de inputs
+if (d.querySelector(".btn-avanzar")) {
+  const btnAvanzar = d.querySelector(".btn-avanzar");
+  const addBtn = d.querySelector(".add-btn");
+  const nameInputAddCategory = d.querySelector(".nameInputAddCategory");
+  const percInputAddCategory = d.querySelector(".percInputAddCategory");
+  let totalAsignado = d.querySelector(".total-asignado");
+
+  if (totalAsignado !== null) {
+    totalAsignado = Number(totalAsignado.innerText);
+  }
+
+  if (totalAsignado === null || totalAsignado !== 100) {
+    btnAvanzar.classList.remove("btn-avanzar");
+    btnAvanzar.classList.add("btn-avanzar-disabled");
+    btnAvanzar.setAttribute("disabled", "");
+  }
+  if (totalAsignado === 100) {
+    addBtn.classList.remove(".btn-avanzar");
+    addBtn.classList.add(".btn-avanzar-disabled");
+    addBtn.setAttribute("disabled", "");
+    nameInputAddCategory.setAttribute("disabled", "");
+    percInputAddCategory.setAttribute("disabled", "");
+  }
+}
+
 // Edit modal handler function
 const editar = (id, nameCat, percCat) => {
   let element = `
@@ -342,6 +386,23 @@ d.addEventListener("submit", (e) => {
 
   // Handler form Add category
   if (e.target.matches("#form-add-cat")) {
+    let totalAsignado = d.querySelector(".total-asignado");
+    totalAsignado = Number(totalAsignado.innerText);
+    const msgPresupuestoSuperado = d.querySelector(".msgPresupuestoSuperado");
+    const containerTotalAsignado = d.querySelector(".container-total-asignado");
+    let percInputAddCategory = d.querySelector(".percInputAddCategory");
+    percInputAddCategory = Number(percInputAddCategory.value);
+
+    if (
+      totalAsignado !== null &&
+      totalAsignado + percInputAddCategory !== 100
+    ) {
+      msgPresupuestoSuperado.classList.remove("hidden");
+      containerTotalAsignado.classList.add("error");
+      msgPresupuestoSuperado.classList.add("error");
+      return;
+    }
+
     if (nameInput[0].value === "") {
       nameInput[0].classList.add("is-invalid");
       errorMsgInputName.classList.remove("hidden");
@@ -519,11 +580,12 @@ d.addEventListener("click", (e) => {
     e.target.matches(".svg-avanzar")
   ) {
     e.preventDefault();
-    let totalAsignado = d.querySelector("#total-asignado");
+    let totalAsignado = d.querySelector(".total-asignado");
     let msgRepartijaDePresupuesto = d.querySelector(
       ".msgRepartijaDePresupuesto"
     );
     let checkTotal = totalAsignado.innerHTML;
+
     if (checkTotal !== "100") {
       msgRepartijaDePresupuesto.classList.remove("hidden");
       msgRepartijaDePresupuesto.classList.add("msgErrorRepartijaDePresupuesto");

@@ -369,6 +369,10 @@ h6 {
   outline: 3px solid var(--red);
   animation: shake 300ms;
 }
+.error {
+  color: var(--red);
+  animation: shake 300ms;
+}
 .msgErrorRepartijaDePresupuesto,
 .msgPresupuestoSuperado {
   text-align: center;
@@ -387,6 +391,10 @@ h6 {
 }
 .container-add-btn {
   z-index: 1;
+}
+.link-disabled {
+  color: gray !important;
+  cursor: initial !important;
 }
 .cssbuttons-io-button-2:disabled {
   background: var(--gray);
@@ -502,8 +510,8 @@ h6 {
 .navbar-custom {
   box-shadow: 0 0 20px 3px var(--eggplant);
 }
-.custom-link-navbar:active {
-background-color: var(--marigold) !important;
+.link-navbar:active {
+  background-color: var(--marigold) !important;
 }
 .nav-item > a:hover,
 .dropdown-item:hover {

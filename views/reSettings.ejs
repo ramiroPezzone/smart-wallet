@@ -15,6 +15,7 @@
 
   <h3>Modificación del presupuesto</h3>
 
+  <input type="hidden" id="isResseting">
   <% if (settings.length !== 0) { %>
   <div class="container-gral-table">
     <p class="titulo-tabla-cat">Categorías</p>
@@ -56,7 +57,7 @@
     <% totalPerc = [...totalPerc, perc.catPerc]%>
     <% }) %>
     <% let resultado = totalPerc.reduce((prev, curr) => prev + curr, 0 )%>
-    <p>Total asignado: <span id="total-asignado"><%= resultado %></span><span>%</span></p>
+    <p>Total asignado: <span class="total-asignado"><%= resultado %></span><span>%</span></p>
     <span class="hidden msgRepartijaDePresupuesto">El 100% del presupuesto debe estar repartido entre las categorías</span>
     <span class="hidden msgPresupuestoSuperado">No puede superarse el 100% al repartir los porcentajes entre las categorías</span>
   </div>

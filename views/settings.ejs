@@ -54,9 +54,11 @@
     <% totalPerc = [...totalPerc, perc.catPerc]%>
     <% }) %>
     <% let resultado = totalPerc.reduce((prev, curr) => prev + curr, 0 )%>
-    <p>Total asignado: <span id="total-asignado"><%= resultado %></span><span>%</span></p>
-    <span class="hidden msgRepartijaDePresupuesto">El 100% del presupuesto debe estar repartido entre las categorías</span>
-    <span class="hidden msgPresupuestoSuperado">No puede superarse el 100% al repartir los porcentajes entre las categorías</span>
+    <div class="container-total-asignado">
+      <p>Total asignado: <span class="total-asignado"><%= resultado %></span><span>%</span></p>
+    </div>
+    <div class="hidden msgRepartijaDePresupuesto">El 100% del presupuesto debe estar repartido entre las categorías</div>
+    <div class="hidden msgPresupuestoSuperado">No puede superarse el 100% al repartir los porcentajes entre las categorías</div>
   </div>
   <% } %>
 
@@ -87,7 +89,7 @@
 
   <div class="container-btn-avanzar">
     <a class="a-btn-avanzar">
-      <button class="btn-avanzar"> Avanzar
+      <button class="btn-avanzar">Avanzar
         <div class="icon">
           <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="svg-avanzar">
             <path d="M0 0h24v24H0z" fill="none"></path>
