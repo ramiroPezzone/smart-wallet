@@ -228,8 +228,10 @@ var porcentajeActual;
 if (d.querySelector(".total-asignado")) {
   porcentajeActual = Number(d.querySelector(".total-asignado").innerHTML);
 }
+var nombreActual;
 const editar = (id, nameCat, percCat) => {
   porcentajeActual = porcentajeActual - Number(percCat);
+  nombreActual = nameCat;
   let element = `
     <div class="childToRemove">
     <div class="modal-header">
@@ -241,8 +243,9 @@ const editar = (id, nameCat, percCat) => {
     <form action="/settings/update-cat/${id}" method="POST" id="form-edit-cat">
     <div class="container-form-add-cat">
     <div class="form-floating mb-3 ">
-    <input type="text" name="catName" class="form-control nameInputEditCategory" id="floatingInput" value="${nameCat}" placeholder:"Nombre de la categoría" autofocus>
+    <input type="text" name="catName" class="form-control nameInputEditCategory" id="floatingInput" value="${nameCat}" placeholder:"Nombre de la categoría">
     <label for="floatingInput">Nombre de la categoría</label>
+    <div class="hidden errorMsgNameRepetidoEdit">Los nombres de las categorías no deben repetirse</div>
     <div class="hidden errorMsgEditName">El nombre no puede quedar vacío</div>
     </div>
     <div class="form-floating">
@@ -447,10 +450,10 @@ d.addEventListener("submit", (e) => {
       }
     });
 
-    if(d.querySelector(".is-invalid")) {
-      return
+    if (d.querySelector(".is-invalid")) {
+      return;
     }
-    
+
     swal({
       title: "Categoría agregada",
       icon: "success",
@@ -466,6 +469,11 @@ d.addEventListener("submit", (e) => {
   if (e.target.matches("#form-edit-cat")) {
     let totalAsignado = d.querySelector(".total-asignado");
     totalAsignado = Number(totalAsignado.innerText);
+
+    let dataTr = d.querySelectorAll(".dataTr");
+    const errorMsgNameRepetidoEdit = d.querySelector(
+      ".errorMsgNameRepetidoEdit"
+    );
 
     let percInputEditCategory;
     if (d.querySelector(".percInputEditCategory")) {
@@ -504,11 +512,32 @@ d.addEventListener("submit", (e) => {
     }
 
     editPercInput = Number(editPercInput[0].value);
-
     if (porcentajeActual + editPercInput > 100) {
       errorMsgPresupuestoSuperado.classList.remove("hidden");
       errorMsgPresupuestoSuperado.classList.add("error");
       percInputEditCategory.classList.add("is-invalid");
+      return;
+    }
+
+    // Validación para que no se repita un nombre de categoría
+    let allNames = [];
+    dataTr.forEach((data) => {
+      allNames = [...allNames, data.getAttribute("id").toLowerCase()].sort();
+    });
+    allNames = allNames.filter((word) => word !== nombreActual.toLowerCase());
+
+    if (allNames.includes(editNameInput[0].value.toLowerCase())) {
+      errorMsgNameRepetidoEdit.classList.remove("hidden");
+      errorMsgNameRepetidoEdit.classList.add("error");
+      editNameInput[0].classList.add("is-invalid");
+      return;
+    } else {
+      errorMsgNameRepetidoEdit.classList.add("hidden");
+      errorMsgNameRepetidoEdit.classList.remove("error");
+      editNameInput[0].classList.remove("is-invalid");
+    }
+
+    if (d.querySelector(".is-invalid")) {
       return;
     }
 
@@ -663,6 +692,16 @@ d.addEventListener("click", (e) => {
     e.target.matches(".btn-cancelar-cambios-cat") ||
     e.target.matches(".span-btn-cancelar-cambios")
   ) {
+    const where = () => {
+      return d.querySelector(".navbar") ? "re-settings" : "settings";
+    };
+    location.href = where();
+  }
+});
+
+// Anulando funcion btn esc
+d.addEventListener("keyup", (e) => {
+  if (e.code === "Escape") {
     const where = () => {
       return d.querySelector(".navbar") ? "re-settings" : "settings";
     };
