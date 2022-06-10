@@ -2,14 +2,15 @@
 
 <body>
 
-  <h1>Nuevo ingreso</h1>
+  <h3>Nuevo ingreso</h3>
 
   <form action="nuevo-ingreso/guardar" method="POST" id="formNvoIngreso">
     <div class="itemInputNvoIngreso">
       <input type="text" name="concept" id="concept" placeholder="En concepto de">
+      <div class="hidden errorMsgIngreso">Debes colocar un nombre</div>
     </div>
     <div class="itemInputNvoIngreso">
-      $<input type="number" name="value" placeholder="Valor" min="0">
+      $<input type="number" name="value" placeholder="Valor" min="0" step="5">
     </div>
     <div class="itemInputNvoIngreso">
       <textarea name="obs" cols="30" rows="10" placeholder="observaciones"></textarea>

@@ -29,7 +29,9 @@
   color: var(--royal-blue-dark);
   text-align: center;
 }
-
+h3 {
+  font-size: 1.8rem !important;
+}
 /* Página de login */
 .container-index,
 .body-settings {
@@ -136,12 +138,32 @@
   justify-content: center;
 }
 .btn-lets-go,
-.btn-avanzar {
+.a-btn-avanzar {
   text-decoration: none;
   text-align: center;
   width: max-content;
 }
-.cssbuttons-io-button {
+.btn-avanzar-disabled {
+  background: var(--gray);
+  color: white;
+  font-family: inherit;
+  padding: 0.35em;
+  padding-left: 1.2em;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 0.9em;
+  border: none;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  box-shadow: inset 0 0 1.6em -0.6em var(--gray-2);
+  overflow: hidden;
+  position: relative;
+  height: 2.8em;
+  padding-right: 3.3em;
+  cursor: initial !important;
+}
+.btn-avanzar {
   background: var(--eggplant);
   color: white;
   font-family: inherit;
@@ -161,7 +183,7 @@
   padding-right: 3.3em;
 }
 
-.cssbuttons-io-button .icon {
+.btn-avanzar .icon {
   background: white;
   margin-left: 1em;
   position: absolute;
@@ -175,22 +197,37 @@
   right: 0.3em;
   transition: all 0.3s;
 }
+.btn-avanzar-disabled .icon {
+  background: white;
+  margin-left: 1em;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.2em;
+  width: 2.2em;
+  border-radius: 0.7em;
+  box-shadow: 0.1em 0.1em 0.6em 0.2em var(--gray-2);
+  right: 0.3em;
+  transition: all 0.3s;
+}
 
-.cssbuttons-io-button:hover .icon {
+.btn-avanzar:hover .icon {
   width: calc(100% - 0.6em);
 }
 
-.cssbuttons-io-button .icon svg {
+.btn-avanzar .icon svg,
+.btn-avanzar-disabled .icon svg {
   width: 1.1em;
   transition: transform 0.3s;
   color: var(--eggplant);
 }
 
-.cssbuttons-io-button:hover .icon svg {
+.btn-avanzar:hover .icon svg {
   transform: translateX(0.1em);
 }
 
-.cssbuttons-io-button:active .icon {
+.btn-avanzar:active .icon {
   transform: scale(0.95);
 }
 
@@ -321,7 +358,8 @@
 .errorMsgEditName,
 .errorMsgEditPerc,
 .msgErrorRepartijaDePresupuesto,
-.msgPresupuestoSuperado {
+.msgPresupuestoSuperado,
+.errorMsgIngreso {
   color: var(--red);
   text-align: left;
   margin-top: 5px;
@@ -339,14 +377,13 @@
   border-radius: 20em;
 }
 .swal-button {
-  /* padding: 7px 19px;
+  padding: 7px 19px;
   border-radius: 20em;
   background-color: var(--eggplant);
   font-size: 1rem;
   font-family: var(--primary-font);
   border: 1px solid var(--eggplant);
-  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3); */
-  display: none;
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
 }
 .swal-title {
   color: var(--eggplant);
@@ -384,6 +421,7 @@
 .btnAddEgreso {
   display: flex;
   width: 200px;
+  height: 65px;
   align-items: center;
   justify-content: space-around;
   font-family: inherit;
@@ -411,7 +449,10 @@
 }
 
 .btnAddIngreso:hover {
-  box-shadow: 0 0.5em 1.5em -0.5em var(--emerald);
+  box-shadow: 0 10px 25px 0.5px var(--emerald);
+}
+.btnAddEgreso:hover {
+  box-shadow: 0 10px 25px 0.5px var(--red);
 }
 
 .btnAddIngreso:active {
@@ -438,8 +479,22 @@
 .navbar-custom {
   box-shadow: 0 0 20px 3px var(--eggplant);
 }
-.container-mi-cuenta {
-  margin-right: 60px;
+.logout-option > div {
+  display: inline-block;
+  margin-right: 10px;
+}
+.container-options-mi-cuenta {
+  position: absolute !important;
+  left: -110px !important;
+}
+.container-data-user {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 5px;
+  max-width: 200px;
+  margin: 0 auto;
 }
 .container-data-user p {
   padding: 0;
@@ -448,15 +503,35 @@
   font-weight: normal;
   font-family: var(--styled-font);
 }
-.container-data-user {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-  margin-bottom: 5px;
-}
 .foto-perfil-user-navbar {
   border-radius: 50%;
   width: 50px;
 }
 /*  */
+.grid-container-months {
+  max-width: 720px;
+}
+.row {
+  align-items: center;
+}
+.row-container-months > div > a {
+  text-decoration: none;
+  color: var(--red);
+}
+.row-container-months > div::before {
+  content: "";
+  width: 100%;
+  height: 2px;
+  background-color: var(--red);
+}
+.row-container-months
+  > div
+  > a:hover:not(.selectedMonth > a, .currentMonth > a) {
+  font-size: 1.3rem;
+}
+.currentMonth {
+  font-size: 1.9rem;
+}
+.selectedMonth {
+  font-size: 1.5rem;
+}

@@ -2,6 +2,8 @@
 
 <body class="body body-settings">
 
+  <%- include("./fragments/navbar") %>
+
   <!-- Modal -->
   <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -11,7 +13,7 @@
   </div>
   <!--  -->
 
-  <h3 class="budget-ask">¿Cómo te gustaría dividir el presupuesto?</h3>
+  <h3 class="budget-ask">Modificación del presupuesto</h3>
 
   <% if (settings.length !== 0) { %>
   <div class="container-gral-table">
@@ -87,7 +89,7 @@
 
   <div class="container-btn-avanzar">
     <a class="a-btn-avanzar">
-      <button class="btn-avanzar"> Avanzar
+      <button class="btn-avanzar">Aceptar
         <div class="icon">
           <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="svg-avanzar">
             <path d="M0 0h24v24H0z" fill="none"></path>

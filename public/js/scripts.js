@@ -1,5 +1,138 @@
 const d = document;
 
+// Verificación del porcentaje para inhabilitar los inputs y el btn Add
+if (d.querySelector("#total-asignado")) {
+  let totalAsignado = d.querySelector("#total-asignado");
+  totalAsignado = Number(totalAsignado.innerHTML);
+  let inputName = d.querySelector(".nameInputAddCategory");
+  let inputPerc = d.querySelector(".percInputAddCategory");
+  let btnAddCategory = d.querySelector(".cssbuttons-io-button-2");
+
+  if (totalAsignado === 100 || totalAsignado > 100) {
+    inputName.setAttribute("disabled", "");
+    inputPerc.setAttribute("disabled", "");
+    btnAddCategory.setAttribute("disabled", "");
+  }
+
+  let btnAvanzar = d.querySelector(".btn-avanzar");
+  if (totalAsignado !== 100) {
+    btnAvanzar.classList.add("btn-avanzar-disabled");
+    btnAvanzar.classList.remove("btn-avanzar");
+  }
+}
+
+// Month selecter current month
+if (d.querySelector(".grid-container-months")) {
+  let currentMonth = new Date().getMonth();
+  let ene = d.querySelector(".ene");
+  let feb = d.querySelector(".feb");
+  let mar = d.querySelector(".mar");
+  let abr = d.querySelector(".abr");
+  let may = d.querySelector(".may");
+  let jun = d.querySelector(".jun");
+  let jul = d.querySelector(".jul");
+  let ago = d.querySelector(".ago");
+  let sep = d.querySelector(".sep");
+  let oct = d.querySelector(".oct");
+  let nov = d.querySelector(".nov");
+  let dic = d.querySelector(".dic");
+
+  switch (currentMonth) {
+    case 0:
+      ene.classList.add("currentMonth");
+      break;
+    case 1:
+      feb.classList.add("currentMonth");
+      break;
+    case 2:
+      mar.classList.add("currentMonth");
+      break;
+    case 3:
+      abr.classList.add("currentMonth");
+      break;
+    case 4:
+      may.classList.add("currentMonth");
+      break;
+    case 5:
+      jun.classList.add("currentMonth");
+      break;
+    case 6:
+      jul.classList.add("currentMonth");
+      break;
+    case 7:
+      ago.classList.add("currentMonth");
+      break;
+    case 8:
+      sep.classList.add("currentMonth");
+      break;
+    case 9:
+      oct.classList.add("currentMonth");
+      break;
+    case 10:
+      nov.classList.add("currentMonth");
+      break;
+    case 11:
+      dic.classList.add("currentMonth");
+      break;
+  }
+}
+// Month selecter selected month
+if (d.querySelector("#month-hidden")) {
+  let monthSelected = d.querySelector("#month-hidden");
+  monthSelected = Number(monthSelected.value);
+  let ene = d.querySelector(".ene");
+  let feb = d.querySelector(".feb");
+  let mar = d.querySelector(".mar");
+  let abr = d.querySelector(".abr");
+  let may = d.querySelector(".may");
+  let jun = d.querySelector(".jun");
+  let jul = d.querySelector(".jul");
+  let ago = d.querySelector(".ago");
+  let sep = d.querySelector(".sep");
+  let oct = d.querySelector(".oct");
+  let nov = d.querySelector(".nov");
+  let dic = d.querySelector(".dic");
+
+  switch (monthSelected) {
+    case 0:
+      ene.classList.add("selectedMonth");
+      break;
+    case 1:
+      feb.classList.add("selectedMonth");
+      break;
+    case 2:
+      mar.classList.add("selectedMonth");
+      break;
+    case 3:
+      abr.classList.add("selectedMonth");
+      break;
+    case 4:
+      may.classList.add("selectedMonth");
+      break;
+    case 5:
+      jun.classList.add("selectedMonth");
+      break;
+    case 6:
+      jul.classList.add("selectedMonth");
+      break;
+    case 7:
+      ago.classList.add("selectedMonth");
+      break;
+    case 8:
+      sep.classList.add("selectedMonth");
+      break;
+    case 9:
+      oct.classList.add("selectedMonth");
+      break;
+    case 10:
+      nov.classList.add("selectedMonth");
+      break;
+    case 11:
+      dic.classList.add("selectedMonth");
+      break;
+  }
+}
+
 // Edit modal handler function
 const editar = (id, nameCat, percCat) => {
   let element = `
@@ -18,7 +151,7 @@ const editar = (id, nameCat, percCat) => {
     <div class="hidden errorMsgEditName">El nombre no puede quedar vacío</div>
     </div>
     <div class="form-floating">
-    <input type="number" name="catPerc" class="form-control percInputEditCategory" id="floatingNumber" placeholder="Porcentaje" min="0" value="${percCat}">
+    <input type="number" name="catPerc" class="form-control percInputEditCategory" id="floatingNumber" placeholder="Porcentaje" min="0" step="5" value="${percCat}">
     <label for="floatingNumber">Porcentaje</label>
     <div class="hidden errorMsgEditPerc">El porcentaje asignado no puede quedar vacío</div>
     </div>
@@ -112,8 +245,11 @@ d.addEventListener("submit", (e) => {
     }
     swal({
       title: "Categoría agregada",
-      icon: "success"
+      icon: "success",
     });
+    const swalBtn = d.querySelector(".swal-button");
+    swalBtn.classList.add("hidden");
+
     d.forms["form-add-cat"].submit();
   }
   //
@@ -149,30 +285,37 @@ d.addEventListener("submit", (e) => {
     }
     swal({
       title: "Categoría editada",
-      icon: "success"
+      icon: "success",
     });
+    const swalBtn = d.querySelector(".swal-button");
+    swalBtn.classList.add("hidden");
+
     d.forms["form-edit-cat"].submit();
   }
   //
-});
+  if (e.target.matches("#formNvoIngreso")) {
+    let concept = d.querySelector("#concept");
+    let errorMsgIngreso = d.querySelector(".errorMsgIngreso");
 
-// Verificación del porcentaje para inhabilitar los inputs y el btn Add
-if (d.querySelector("#total-asignado")) {
-  let totalAsignado = d.querySelector("#total-asignado");
-  totalAsignado = Number(totalAsignado.innerHTML);
-  let inputName = d.querySelector(".nameInputAddCategory");
-  let inputPerc = d.querySelector(".percInputAddCategory");
-  let btnAddCategory = d.querySelector(".cssbuttons-io-button-2");
+    if (concept.value === "") {
+      errorMsgIngreso.classList.add("is-invalid");
+      errorMsgIngreso.classList.remove("hidden");
+      return;
+    }
+    swal({
+      title: "Ingreso agregado",
+      icon: "success",
+    });
+    const swalBtn = d.querySelector(".swal-button");
+    swalBtn.classList.add("hidden");
 
-  if (totalAsignado === 100 || totalAsignado > 100) {
-    inputName.setAttribute("disabled", "");
-    inputPerc.setAttribute("disabled", "");
-    btnAddCategory.setAttribute("disabled", "");
+    // d.forms["formNvoIngreso"].submit();
   }
-}
+});
 
 // Clicks handler
 d.addEventListener("click", (e) => {
+  // Handler btn avanzar de settings
   if (
     e.target.matches(".btn-avanzar") ||
     e.target.matches(".icon") ||

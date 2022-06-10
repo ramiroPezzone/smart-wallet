@@ -6,7 +6,7 @@ const controllers = {
   main: async (req, res) => {
     let user = req.user;
     let hasSettings = await UserSettings.findOne({ user: user._id });
-    let view = hasSettings === null ? "main.ejs" : "panel.ejs";
+    let view = hasSettings === null ? "main" : "panel";
     res.render(view, { user });
   },
   settings: async (req, res) => {
@@ -14,7 +14,7 @@ const controllers = {
     let settings = await UserSettings.find({ user: user._id }).sort({
       catPerc: "desc",
     });
-    res.render("settings.ejs", { user, settings });
+    res.render("settings", { user, settings });
   },
   settingsSave: async (req, res) => {
     let { catName, catPerc } = req.body;
@@ -47,7 +47,7 @@ const controllers = {
     res.redirect("back");
   },
   nuevoIngreso: (req, res) => {
-    res.render("formNvoIngreso.ejs");
+    res.render("formNvoIngreso");
   },
   guardarNvoIngreso: async (req, res) => {
     let user = req.user._id;
@@ -66,7 +66,7 @@ const controllers = {
     let cats = await UserSettings.find({ user: id.user }).sort({
       catPerc: "desc",
     });
-    res.render("formNvoEgreso.ejs", { cats });
+    res.render("formNvoEgreso", { cats });
   },
   guardarNvoEgreso: async (req, res) => {
     let user = req.user._id;
@@ -81,22 +81,33 @@ const controllers = {
     res.redirect("/main");
   },
   verIngresosDelMes: async (req, res) => {
+    let user = req.user._id;
+    let month = new Date().getMonth();
     let verIngresos = await ingresos.find({ user: req.user._id });
-    res.render("ingresosDelMes", { ingresos: verIngresos });
+    res.render("ingresosDelMes", { ingresos: verIngresos, user, month });
   },
   verEgresosDelMes: async (req, res) => {
+    let user = req.user._id;
     let verEgresos = await Egresos.find({ user: req.user._id });
-    res.render("egresosDelMes", { egresos: verEgresos });
+    res.render("egresosDelMes", { egresos: verEgresos, user });
   },
   verIngresosDelMesX: async (req, res) => {
+    let user = req.user._id;
     let month = req.params.month;
     let verIngresos = await ingresos.find({ user: req.user._id, month: month });
-    res.render("ingresosDelMes", { ingresos: verIngresos });
+    res.render("ingresosDelMes", { ingresos: verIngresos, user, month });
   },
   verEgresosDelMesX: async (req, res) => {
     let month = req.params.month;
     let verEgresos = await Egresos.find({ user: req.user._id, month: month });
     res.render("egresosDelMes", { egresos: verEgresos });
+  },
+  reSettings: async (req, res) => {
+    let user = req.user;
+    let settings = await UserSettings.find({ user: user._id }).sort({
+      catPerc: "desc",
+    });
+    res.render("reSettings", { user, settings });
   },
 };
 

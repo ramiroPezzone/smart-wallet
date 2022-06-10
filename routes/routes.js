@@ -29,4 +29,6 @@ router.get("/egresos-del-mes", ensureAuth, go.verEgresosDelMes);
 
 router.get("/egresos-del-mes/:month", ensureAuth, go.verEgresosDelMesX);
 
+router.get("/re-settings", ensureAuth, go.reSettings);
+
 module.exports = router;
