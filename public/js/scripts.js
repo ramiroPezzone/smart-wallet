@@ -22,7 +22,10 @@ if (d.querySelector("#total-asignado")) {
 }
 
 // Month selecter current month
-if (d.querySelector(".grid-container-months")) {
+if (
+  d.querySelector(".ingresosMonthSelector") ||
+  d.querySelector(".egresosMonthSelector")
+) {
   let currentMonth = new Date().getMonth();
   let ene = d.querySelector(".ene");
   let feb = d.querySelector(".feb");
@@ -39,47 +42,79 @@ if (d.querySelector(".grid-container-months")) {
 
   switch (currentMonth) {
     case 0:
-      ene.classList.add("currentMonth");
+      ene.addAttribute("selected", "");
+      ene.classList.add("selected");
+      ene.classList.add("current");
       break;
     case 1:
-      feb.classList.add("currentMonth");
+      feb.setAttribute("selected", "");
+      feb.classList.add("selected");
+      feb.classList.add("current");
       break;
     case 2:
-      mar.classList.add("currentMonth");
+      mar.setAttribute("selected", "");
+      mar.classList.add("selected");
+      mar.classList.add("current");
       break;
     case 3:
-      abr.classList.add("currentMonth");
+      abr.setAttribute("selected", "");
+      abr.classList.add("selected");
+      abr.classList.add("current");
       break;
     case 4:
-      may.classList.add("currentMonth");
+      may.setAttribute("selected", "");
+      may.classList.add("selected");
+      may.classList.add("current");
       break;
     case 5:
-      jun.classList.add("currentMonth");
+      jun.setAttribute("selected", "");
+      jun.classList.add("selected");
+      jun.classList.add("current");
       break;
     case 6:
-      jul.classList.add("currentMonth");
+      jul.setAttribute("selected", "");
+      jul.classList.add("selected");
+      jul.classList.add("current");
       break;
     case 7:
-      ago.classList.add("currentMonth");
+      ago.setAttribute("selected", "");
+      ago.classList.add("selected");
+      ago.classList.add("current");
       break;
     case 8:
-      sep.classList.add("currentMonth");
+      sep.setAttribute("selected", "");
+      sep.classList.add("selected");
+      sep.classList.add("current");
       break;
     case 9:
-      oct.classList.add("currentMonth");
+      oct.setAttribute("selected", "");
+      oct.classList.add("selected");
+      oct.classList.add("current");
       break;
     case 10:
-      nov.classList.add("currentMonth");
+      nov.setAttribute("selected", "");
+      nov.classList.add("selected");
+      nov.classList.add("current");
       break;
     case 11:
-      dic.classList.add("currentMonth");
+      dic.setAttribute("selected", "");
+      dic.classList.add("selected");
+      dic.classList.add("current");
       break;
   }
 }
+
 // Month selecter selected month
 if (d.querySelector("#month-hidden")) {
   let monthSelected = d.querySelector("#month-hidden");
   monthSelected = Number(monthSelected.value);
+  let months = d.querySelectorAll(".month");
+
+  months.forEach((month) => {
+    month.removeAttribute("selected");
+    month.classList.remove("selected");
+  });
+
   let ene = d.querySelector(".ene");
   let feb = d.querySelector(".feb");
   let mar = d.querySelector(".mar");
@@ -95,40 +130,52 @@ if (d.querySelector("#month-hidden")) {
 
   switch (monthSelected) {
     case 0:
-      ene.classList.add("selectedMonth");
+      ene.addAttribute("selected", "");
+      ene.classList.add("selected");
       break;
     case 1:
-      feb.classList.add("selectedMonth");
+      feb.setAttribute("selected", "");
+      feb.classList.add("selected");
       break;
     case 2:
-      mar.classList.add("selectedMonth");
+      mar.setAttribute("selected", "");
+      mar.classList.add("selected");
       break;
     case 3:
-      abr.classList.add("selectedMonth");
+      abr.setAttribute("selected", "");
+      abr.classList.add("selected");
       break;
     case 4:
-      may.classList.add("selectedMonth");
+      may.setAttribute("selected", "");
+      may.classList.add("selected");
       break;
     case 5:
-      jun.classList.add("selectedMonth");
+      jun.setAttribute("selected", "");
+      jun.classList.add("selected");
       break;
     case 6:
-      jul.classList.add("selectedMonth");
+      jul.setAttribute("selected", "");
+      jul.classList.add("selected");
       break;
     case 7:
-      ago.classList.add("selectedMonth");
+      ago.setAttribute("selected", "");
+      ago.classList.add("selected");
       break;
     case 8:
-      sep.classList.add("selectedMonth");
+      sep.setAttribute("selected", "");
+      sep.classList.add("selected");
       break;
     case 9:
-      oct.classList.add("selectedMonth");
+      oct.setAttribute("selected", "");
+      oct.classList.add("selected");
       break;
     case 10:
-      nov.classList.add("selectedMonth");
+      nov.setAttribute("selected", "");
+      nov.classList.add("selected");
       break;
     case 11:
-      dic.classList.add("selectedMonth");
+      dic.setAttribute("selected", "");
+      dic.classList.add("selected");
       break;
   }
 }
@@ -215,6 +262,80 @@ if (d.querySelector("#form-add-cat")) {
   });
 }
 
+// Add moves form blur handler
+if (d.querySelector(".container-form-new-move")) {
+  let errorMsgInputConcept = d.querySelector(".errorMsgInputConcept");
+  let errorMsgInputMount = d.querySelector(".errorMsgInputMount");
+  let nameInputNewMove = d.querySelector(".nameInputNewMove");
+  let mountInputNewMove = d.querySelector(".mountInputNewMove");
+  let egresosSelector = d.querySelector(".egresosSelector");
+  let errorMsgCatSelect = d.querySelector(".errorMsgCatSelect");
+
+  nameInputNewMove.addEventListener("blur", () => {
+    if (nameInputNewMove.value === "") {
+      nameInputNewMove.classList.add("is-invalid");
+      nameInputNewMove.classList.remove("is-valid");
+      errorMsgInputConcept.classList.add("errorMsgIngresoEgreso");
+      errorMsgInputConcept.classList.remove("hidden");
+      return;
+    }
+    if (nameInputNewMove.value !== "") {
+      nameInputNewMove.classList.remove("is-invalid");
+      nameInputNewMove.classList.add("is-valid");
+      errorMsgInputConcept.classList.remove("errorMsgIngresoEgreso");
+      errorMsgInputConcept.classList.add("hidden");
+    }
+  });
+
+  mountInputNewMove.addEventListener("blur", () => {
+    if (mountInputNewMove.value === "") {
+      mountInputNewMove.classList.add("is-invalid");
+      mountInputNewMove.classList.remove("is-valid");
+      errorMsgInputMount.classList.add("errorMsgIngresoEgreso");
+      errorMsgInputMount.classList.remove("hidden");
+      return;
+    }
+    if (mountInputNewMove.value !== "") {
+      mountInputNewMove.classList.remove("is-invalid");
+      mountInputNewMove.classList.add("is-valid");
+      errorMsgInputMount.classList.remove("errorMsgIngresoEgreso");
+      errorMsgInputMount.classList.add("hidden");
+    }
+  });
+
+  // Select validations
+  egresosSelector.addEventListener("change", () => {
+    if (egresosSelector.value === "choiceOne") {
+      egresosSelector.classList.add("is-invalid");
+      egresosSelector.classList.remove("is-valid");
+      errorMsgCatSelect.classList.add("errorMsgIngresoEgreso");
+      errorMsgCatSelect.classList.remove("hidden");
+      return;
+    }
+    if (egresosSelector.value !== "") {
+      egresosSelector.classList.remove("is-invalid");
+      egresosSelector.classList.add("is-valid");
+      errorMsgCatSelect.classList.remove("errorMsgIngresoEgreso");
+      errorMsgCatSelect.classList.add("hidden");
+    }
+  });
+  egresosSelector.addEventListener("blur", () => {
+    if (egresosSelector.value === "choiceOne") {
+      egresosSelector.classList.add("is-invalid");
+      egresosSelector.classList.remove("is-valid");
+      errorMsgCatSelect.classList.add("errorMsgIngresoEgreso");
+      errorMsgCatSelect.classList.remove("hidden");
+      return;
+    }
+    if (egresosSelector.value !== "") {
+      egresosSelector.classList.remove("is-invalid");
+      egresosSelector.classList.add("is-valid");
+      errorMsgCatSelect.classList.remove("errorMsgIngresoEgreso");
+      errorMsgCatSelect.classList.add("hidden");
+    }
+  });
+}
+
 // Submits handler
 d.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -293,13 +414,36 @@ d.addEventListener("submit", (e) => {
     d.forms["form-edit-cat"].submit();
   }
   //
-  if (e.target.matches("#formNvoIngreso")) {
-    let concept = d.querySelector("#concept");
-    let errorMsgIngreso = d.querySelector(".errorMsgIngreso");
 
-    if (concept.value === "") {
-      errorMsgIngreso.classList.add("is-invalid");
-      errorMsgIngreso.classList.remove("hidden");
+  // Handler form Nuevo ingreso
+  if (e.target.matches("#formNvoIngreso")) {
+    let errorMsgInputConcept = d.querySelector(".errorMsgInputConcept");
+    let errorMsgInputMount = d.querySelector(".errorMsgInputMount");
+    let nameInputNewMove = d.querySelector(".nameInputNewMove");
+    let mountInputNewMove = d.querySelector(".mountInputNewMove");
+
+    if (nameInputNewMove.value === "") {
+      nameInputNewMove.classList.add("is-invalid");
+      errorMsgInputConcept.classList.add("errorMsgIngresoEgreso");
+      errorMsgInputConcept.classList.remove("hidden");
+      return;
+    }
+    if (nameInputNewMove.value === "") {
+      nameInputNewMove.classList.add("is-invalid");
+      errorMsgInputConcept.classList.add("errorMsgIngresoEgreso");
+      errorMsgInputConcept.classList.remove("hidden");
+      return;
+    }
+    if (mountInputNewMove.value === "") {
+      mountInputNewMove.classList.add("is-invalid");
+      errorMsgInputMount.classList.add("errorMsgIngresoEgreso");
+      errorMsgInputMount.classList.remove("hidden");
+      return;
+    }
+    if (mountInputNewMove.value === "") {
+      mountInputNewMove.classList.add("is-invalid");
+      errorMsgInputMount.classList.add("errorMsgIngresoEgreso");
+      errorMsgInputMount.classList.remove("hidden");
       return;
     }
     swal({
@@ -309,7 +453,60 @@ d.addEventListener("submit", (e) => {
     const swalBtn = d.querySelector(".swal-button");
     swalBtn.classList.add("hidden");
 
-    // d.forms["formNvoIngreso"].submit();
+    d.forms["formNvoIngreso"].submit();
+  }
+
+  if (e.target.matches("#formNvoEgreso")) {
+    let errorMsgInputMount = d.querySelector(".errorMsgInputMount");
+    let mountInputNewMove = d.querySelector(".mountInputNewMove");
+    let egresosSelector = d.querySelector(".egresosSelector");
+    let errorMsgCatSelect = d.querySelector(".errorMsgCatSelect");
+
+    if (egresosSelector.value === "choiceOne") {
+      egresosSelector.classList.add("is-invalid");
+      egresosSelector.classList.remove("is-valid");
+      errorMsgCatSelect.classList.add("errorMsgIngresoEgreso");
+      errorMsgCatSelect.classList.remove("hidden");
+      return;
+    }
+    if (egresosSelector.value !== "choiceOne") {
+      egresosSelector.classList.remove("is-invalid");
+      egresosSelector.classList.add("is-valid");
+      errorMsgCatSelect.classList.remove("errorMsgIngresoEgreso");
+      errorMsgCatSelect.classList.add("hidden");
+    }
+    if (mountInputNewMove.value === "") {
+      mountInputNewMove.classList.add("is-invalid");
+      errorMsgInputMount.classList.add("errorMsgIngresoEgreso");
+      errorMsgInputMount.classList.remove("hidden");
+      return;
+    }
+    if (mountInputNewMove.value !== "") {
+      mountInputNewMove.classList.remove("is-invalid");
+      mountInputNewMove.classList.add("is-valid");
+      errorMsgInputMount.classList.remove("errorMsgIngresoEgreso");
+      errorMsgInputMount.classList.add("hidden");
+    }
+    swal({
+      title: "Ingreso agregado",
+      icon: "success",
+    });
+    const swalBtn = d.querySelector(".swal-button");
+    swalBtn.classList.add("hidden");
+
+    d.forms["formNvoEgreso"].submit();
+  }
+});
+
+// onChanges handler
+d.addEventListener("change", (e) => {
+  if (e.target.matches(".ingresosMonthSelector")) {
+    let monthSelected = e.target.value;
+    location.href = `/ingresos-del-mes/${monthSelected}`;
+  }
+  if (e.target.matches(".egresosMonthSelector")) {
+    let monthSelected = e.target.value;
+    location.href = `/egresos-del-mes/${monthSelected}`;
   }
 });
 
@@ -333,5 +530,24 @@ d.addEventListener("click", (e) => {
       return;
     }
     location.href = "/main";
+  }
+
+  if (
+    e.target.matches(".cancel-move-btn") ||
+    e.target.matches(".svg-cancel-move-btn") ||
+    e.target.matches(".span-cancel-move-btn") ||
+    e.target.matches(".path-cancel-move-btn")
+  ) {
+    location.href = "/main";
+  }
+  if (
+    e.target.matches(".container-btn-comenzar") ||
+    e.target.matches(".a-btn-comenzar") ||
+    e.target.matches(".btn-comenzar") ||
+    e.target.matches(".icon-comenzar") ||
+    e.target.matches(".path-btn-comenzar") ||
+    e.target.matches(".svg-comenzar")
+  ) {
+    location.href = "/settings";
   }
 });

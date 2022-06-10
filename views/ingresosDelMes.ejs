@@ -4,96 +4,71 @@
 
   <%- include("./fragments/navbar") %>
 
-  <h3>Ingresos del mes</h1>
+  <h3>Ingresos del mes</h3>
 
-    <% if (month) { %>
-    <input type="hidden" value=<%= month %> id="month-hidden" />
-    <% } %>
+  <% if (month) { %>
+  <input type="hidden" value=<%= month %> id="month-hidden" />
+  <% } %>
 
-    <div class="container grid-container-months">
-      <div class="row-container-months row">
-        <div class="col-sm-4 col-md-3 ene">
-          <a href="/ingresos-del-mes/0">Ene</a>
-        </div>
-        <div class="col-sm-4 col-md-3 feb">
-          <a href="/ingresos-del-mes/1">Feb</a>
-        </div>
-        <div class="col-sm-4 col-md-3 mar">
-          <a href="/ingresos-del-mes/2">Mar</a>
-        </div>
-        <div class="col-sm-4 col-md-3 abr">
-          <a href="/ingresos-del-mes/3">Abr</a>
-        </div>
-        <div class="col-sm-4 col-md-3 may">
-          <a href="/ingresos-del-mes/4">May</a>
-        </div>
-        <div class="col-sm-4 col-md-3 jun">
-          <a href="/ingresos-del-mes/5">Jun</a>
-        </div>
-        <div class="col-sm-4 col-md-3 jul">
-          <a href="/ingresos-del-mes/6">Jul</a>
-        </div>
-        <div class="col-sm-4 col-md-3 ago">
-          <a href="/ingresos-del-mes/7">Ago</a>
-        </div>
-        <div class="col-sm-4 col-md-3 sep">
-          <a href="/ingresos-del-mes/8">Sep</a>
-        </div>
-        <div class="col-sm-4 col-md-3 oct">
-          <a href="/ingresos-del-mes/9">Oct</a>
-        </div>
-        <div class="col-sm-4 col-md-3 nov">
-          <a href="/ingresos-del-mes/10">Nov</a>
-        </div>
-        <div class="col-sm-4 col-md-3 dic">
-          <a href="/ingresos-del-mes/11">Dic</a>
-        </div>
-      </div>
-    </div>
+  <select class="form-select ingresosMonthSelector" aria-label="Selector de mes" name="monthSelector">
+    <option value="0" class="month ene">Enero</option>
+    <option value="1" class="month feb">Febrero</option>
+    <option value="2" class="month mar">Marzo</option>
+    <option value="3" class="month abr">Abril</option>
+    <option value="4" class="month may">Mayo</option>
+    <option value="5" class="month jun">Junio</option>
+    <option value="6" class="month jul">Julio</option>
+    <option value="7" class="month ago">Agosto</option>
+    <option value="8" class="month sep">Septiembre</option>
+    <option value="9" class="month oct">Octubre</option>
+    <option value="10" class="month nov">Noviembre</option>
+    <option value="11" class="month dic">Diciembre</option>
+  </select>
 
-    <div class="container-gral-table">
-      <table class="table table-striped table-hover">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th>Día</th>
-            <th>Concepto</th>
-            <th>Monto</th>
-            <th>Obs</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% if (ingresos.length === 0) { %>
-          <tr>
-            <td colspan="5">No se registran ingresos en este período</td>
-          </tr>
-          <% } else { %>
-          <% for( let i = 0; i < ingresos.length; i++ ) { %>
-          <tr>
-            <td scope="col"><%= i + 1 %></td>
-            <td><%= ingresos[i].date %></td>
-            <td><%= ingresos[i].concept %></td>
-            <td>$ <%= ingresos[i].value %></td>
-            <% if (ingresos[i].obs === "") { %>
-            <td>-</th>
-              <% } else {%>
-            <td><%= ingresos[i].obs %></td>
-            <% } %>
-          </tr>
+  <div class="container-gral-table">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th>Día</th>
+          <th>Concepto</th>
+          <th>Monto</th>
+          <th>Obs</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (ingresos.length === 0) { %>
+        <tr>
+          <td colspan="5">No se registran ingresos en este período</td>
+        </tr>
+        <% } else { %>
+        <% for( let i = 0; i < ingresos.length; i++ ) { %>
+        <tr>
+          <td scope="col"><%= i + 1 %></td>
+          <td><%= ingresos[i].date %></td>
+          <td><%= ingresos[i].concept %></td>
+          <td>$ <%= ingresos[i].value %></td>
+          <% if (ingresos[i].obs === "") { %>
+          <td>-</th>
+            <% } else {%>
+          <td><%= ingresos[i].obs %></td>
           <% } %>
-          <% } %>
-        </tbody>
-      </table>
+        </tr>
+        <% } %>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
 
-      <% let totalIngresos = []; %>
-      <% ingresos.forEach(monto => { %>
-      <% totalIngresos = [...totalIngresos, monto.value]%>
-      <% }) %>
-      <% let resultado = totalIngresos.reduce((prev, curr) => prev + curr, 0 )%>
+    <% let totalIngresos = []; %>
+    <% ingresos.forEach(monto => { %>
+    <% totalIngresos = [...totalIngresos, monto.value]%>
+    <% }) %>
+    <% let resultado = totalIngresos.reduce((prev, curr) => prev + curr, 0 )%>
 
-      <p>Total de ingresos: $ <span><%= resultado %></span></p>
+    <p>Total de ingresos: $ <span><%= resultado %></span></p>
 
-      <%- include("./fragments/scripts") %>
+  <%- include("./fragments/scripts") %>
 </body>
 
 </html>

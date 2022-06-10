@@ -1,31 +1,53 @@
 <%- include("./fragments/head") %>
 
-<body>
+<body class="body body-form-ingreso-o-egreso">
+
+  <%- include("./fragments/navbar") %>
 
   <h3>Nuevo ingreso</h3>
 
-  <form action="nuevo-ingreso/guardar" method="POST" id="formNvoIngreso">
-    <div class="itemInputNvoIngreso">
-      <input type="text" name="concept" id="concept" placeholder="En concepto de">
-      <div class="hidden errorMsgIngreso">Debes colocar un nombre</div>
-    </div>
-    <div class="itemInputNvoIngreso">
-      $<input type="number" name="value" placeholder="Valor" min="0" step="5">
-    </div>
-    <div class="itemInputNvoIngreso">
-      <textarea name="obs" cols="30" rows="10" placeholder="observaciones"></textarea>
-    </div>
-    <div>
-      <a href="/main">
-        <button type="button">
-          Cancelar
-        </button>
-      </a>
-    </div>
-    <button type="submit">
-      Guardar
-    </button>
-  </form>
+  <div class="container-form-new-move">
+    <form action="/nuevo-ingreso/guardar" method="POST" id="formNvoIngreso">
+      <div class="container-items-form-new-move">
+
+        <input type="hidden" class="egresosSelector">
+
+        <div class="form-floating mb-3 containerNameNewMove">
+          <input type="text" name="concept" class="form-control nameInputNewMove" id="concept" placeholder="En concepto de">
+          <label for="concept">En concepto de</label>
+          <div class="hidden errorMsgInputConcept">Por favor, coloca una referencia</div>
+        </div>
+
+        <div class="form-floating mb-3 containerMountNewMove">
+          <input type="number" name="value" class="form-control mountInputNewMove" id="floatingNumber" placeholder="Monto" min="0">
+          <label for="floatingNumber">Monto</label>
+          <div class="hidden errorMsgInputMount">Ingresá el monto</div>
+        </div>
+
+        <div class="form-floating mb-3 containerObsNewMove">
+          <textarea name="obs" class="form-control obsInputNewMove" id="obsNewMove" placeholder="Observaciones"></textarea>
+          <label for="obsNewMove" class="form-label">Observaciones</label>
+        </div>
+
+        <div class="container-btns-ingreso-o-egreso">
+          <button type="button" class="cancel-move-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#fff" class="bi bi-x-circle" viewBox="0 0 16 16" class="svg-cancel-move-btn">
+              <path class="path-cancel-move-btn" d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+              <path class="path-cancel-move-btn" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+            </svg>
+            <span class="span-cancel-move-btn">Cancelar</span>
+          </button>
+          <button type="submit" class="add-move-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+              <path fill="none" d="M0 0h24v24H0z"></path>
+              <path fill="#fff" d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"></path>
+            </svg>
+            <span>Agregar</span>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
 
   <%- include("./fragments/scripts") %>
 </body>

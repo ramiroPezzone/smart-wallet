@@ -1,6 +1,7 @@
 :root {
   --eggplant: #634c5eff;
   --eggplant-2: #94708c;
+  --eggplant-3: #7e6077;
   --sage: #d3c8a0ff;
   --emerald: rgb(89, 177, 63);
   --emerald-2: rgb(133, 204, 52);
@@ -31,6 +32,15 @@
 }
 h3 {
   font-size: 1.8rem !important;
+}
+h4 {
+  font-size: 1.6rem !important;
+}
+h5 {
+  font-size: 1.4rem !important;
+}
+h6 {
+  font-size: 1.2rem !important;
 }
 /* Página de login */
 .container-index,
@@ -132,13 +142,15 @@ h3 {
 /* Button VAMOS */
 /* From uiverse.io by @adamgiebl */
 .container-btn-lets-go,
-.container-btn-avanzar {
+.container-btn-avanzar,
+.container-btn-comenzar {
   margin: 0 auto;
   display: flex;
   justify-content: center;
 }
 .btn-lets-go,
-.a-btn-avanzar {
+.a-btn-avanzar,
+.a-btn-comenzar {
   text-decoration: none;
   text-align: center;
   width: max-content;
@@ -163,7 +175,8 @@ h3 {
   padding-right: 3.3em;
   cursor: initial !important;
 }
-.btn-avanzar {
+.btn-avanzar,
+.btn-comenzar {
   background: var(--eggplant);
   color: white;
   font-family: inherit;
@@ -183,7 +196,8 @@ h3 {
   padding-right: 3.3em;
 }
 
-.btn-avanzar .icon {
+.btn-avanzar .icon,
+.btn-comenzar .icon-comenzar {
   background: white;
   margin-left: 1em;
   position: absolute;
@@ -197,7 +211,8 @@ h3 {
   right: 0.3em;
   transition: all 0.3s;
 }
-.btn-avanzar-disabled .icon {
+.btn-avanzar-disabled .icon,
+.btn-comenzar-disabled .icon-comenzar {
   background: white;
   margin-left: 1em;
   position: absolute;
@@ -212,22 +227,27 @@ h3 {
   transition: all 0.3s;
 }
 
-.btn-avanzar:hover .icon {
+.btn-avanzar:hover .icon,
+.btn-comenzar:hover .icon-comenzar {
   width: calc(100% - 0.6em);
 }
 
 .btn-avanzar .icon svg,
-.btn-avanzar-disabled .icon svg {
+.btn-avanzar-disabled .icon svg,
+.btn-comenzar .icon svg,
+.btn-comenzar-disabled .icon-comenzar svg {
   width: 1.1em;
   transition: transform 0.3s;
   color: var(--eggplant);
 }
 
-.btn-avanzar:hover .icon svg {
+.btn-avanzar:hover .icon svg,
+.btn-comenzar:hover .icon-comenzar svg {
   transform: translateX(0.1em);
 }
 
-.btn-avanzar:active .icon {
+.btn-avanzar:active .icon,
+.btn-comenzar:active .icon-comenzar {
   transform: scale(0.95);
 }
 
@@ -359,7 +379,7 @@ h3 {
 .errorMsgEditPerc,
 .msgErrorRepartijaDePresupuesto,
 .msgPresupuestoSuperado,
-.errorMsgIngreso {
+.errorMsgIngresoEgreso {
   color: var(--red);
   text-align: left;
   margin-top: 5px;
@@ -456,7 +476,10 @@ h3 {
 }
 
 .btnAddIngreso:active {
-  box-shadow: 0 0.3em 1em -0.5em var(--red);
+  box-shadow: 0 5px 12px var(--emerald);
+}
+.btnAddEgreso:active {
+  box-shadow: 0 5px 12px var(--red);
 }
 .container-add-ingreso-pannel,
 .container-add-egreso-pannel {
@@ -479,13 +502,22 @@ h3 {
 .navbar-custom {
   box-shadow: 0 0 20px 3px var(--eggplant);
 }
+.custom-link-navbar:active {
+background-color: var(--marigold) !important;
+}
+.nav-item > a:hover,
+.dropdown-item:hover {
+  color: var(--eggplant) !important;
+}
+.nav-item > a,
+.dropdown-item {
+  color: var(--eggplant-3) !important;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
 .logout-option > div {
   display: inline-block;
   margin-right: 10px;
-}
-.container-options-mi-cuenta {
-  position: absolute !important;
-  left: -110px !important;
 }
 .container-data-user {
   display: flex;
@@ -508,30 +540,110 @@ h3 {
   width: 50px;
 }
 /*  */
-.grid-container-months {
-  max-width: 720px;
+
+/* Ver movimientos del mes */
+.current {
+  font-size: 1.3rem;
+  color: var(--red-2);
 }
-.row {
-  align-items: center;
-}
-.row-container-months > div > a {
-  text-decoration: none;
+.selected {
+  font-size: 1.5rem;
   color: var(--red);
 }
-.row-container-months > div::before {
-  content: "";
+/*  */
+
+/* Ingresos y Egresos del mes */
+.body-ingresos-del-mes h3,
+.body-egresos-del-mes h3,
+.body-settings h3,
+.body-form-ingreso-o-egreso h3 {
+  margin-top: 25px;
+  color: var(--eggplant);
+}
+textarea {
+  resize: none !important;
+  height: 150px !important;
+}
+.ingresosMonthSelector,
+.egresosMonthSelector {
+  max-width: 350px;
+  margin: 20px auto;
+}
+.container-btns-ingreso-o-egreso {
+  display: flex;
+  flex-direction: row;
   width: 100%;
-  height: 2px;
-  background-color: var(--red);
+  max-width: 350px;
+  margin: 20px auto;
+  justify-content: center;
+  gap: 2%;
 }
-.row-container-months
-  > div
-  > a:hover:not(.selectedMonth > a, .currentMonth > a) {
-  font-size: 1.3rem;
+
+/* Cancel btn */
+.cancel-move-btn span {
+  color: white;
 }
-.currentMonth {
-  font-size: 1.9rem;
+.cancel-move-btn {
+  display: flex;
+  align-items: center;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 0.7em 1.4em 0.7em 1.1em;
+  background: var(--red-2);
+  background: linear-gradient(0deg, var(--red), var(--red-2));
+  border: none;
+  box-shadow: 0 0.7em 1.5em -0.5em var(--red);
+  letter-spacing: 0.05em;
+  border-radius: 20em;
 }
-.selectedMonth {
-  font-size: 1.5rem;
+.cancel-move-btn svg {
+  margin-right: 6px;
+}
+.cancel-move-btn:hover {
+  box-shadow: 0 0.5em 1.5em -0.5em var(--red);
+}
+.cancel-move-btn:active {
+  box-shadow: 0 0.3em 1em -0.5em var(--red);
+}
+
+/* Add btn */
+.add-move-btn span {
+  color: white;
+}
+.add-move-btn {
+  display: flex;
+  align-items: center;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 0.7em 1.4em 0.7em 1.1em;
+  background: var(--emerald-2);
+  background: linear-gradient(0deg, var(--emerald), var(--emerald-2));
+  border: none;
+  box-shadow: 0 0.7em 1.5em -0.5em var(--emerald);
+  letter-spacing: 0.05em;
+  border-radius: 20em;
+}
+.add-move-btn svg {
+  margin-right: 6px;
+}
+.add-move-btn:hover {
+  box-shadow: 0 0.5em 1.5em -0.5em var(--emerald);
+}
+.add-move-btn:active {
+  box-shadow: 0 0.3em 1em -0.5em var(--emerald);
+}
+.container-form-new-move {
+  max-width: 350px;
+  margin: 0 auto;
+}
+.egresosSelector {
+  height: 58px;
+}
+@media (min-width: 992px) {
+  .container-options-mi-cuenta {
+    position: absolute !important;
+    left: -110px !important;
+  }
 }

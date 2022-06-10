@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-custom">
   <div class="container-fluid">
     <a class="navbar-brand" href="/main">
-      <img src="/imgs/logo smart wallet.png" alt="logo smart wallet" width="40">
+      <img src="/imgs/logo smart wallet.png" alt="logo smart wallet" width="40" height="40">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -16,8 +16,8 @@
             Ver movimientos
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" href="/ingresos-del-mes">Ingresos del mes</a></li>
-            <li><a class="dropdown-item" href="/egresos-del-mes">Egresos del mes</a></li>
+            <li><a class="dropdown-item custom-link-navbar" href="/ingresos-del-mes">Ingresos del mes</a></li>
+            <li><a class="dropdown-item custom-link-navbar" href="/egresos-del-mes">Egresos del mes</a></li>
           </ul>
         </li>
       </ul>
@@ -34,9 +34,9 @@
                   <img src="<%= user.image %>" alt="foto perfil" class="foto-perfil-user-navbar">
                 </div>
                 <hr>
-                <li><a class="dropdown-item" href="/re-settings">Configurar presupuesto</a></li>
+                <li><a class="dropdown-item custom-link-navbar" href="/re-settings">Configurar presupuesto</a></li>
                 <li>
-                  <a class="dropdown-item logout-option" href="/auth/logout">
+                  <a class="dropdown-item logout-option custom-link-navbar" href="/auth/logout">
                     <div>
                       Logout
                     </div>

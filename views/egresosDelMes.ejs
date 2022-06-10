@@ -1,55 +1,64 @@
 <%- include("./fragments/head") %>
 
-<body>
+<body class="body body-egresos-del-mes">
 
   <%- include("./fragments/navbar") %>
 
-  <h3>Egresos del mes</h1>
+  <h3>Egresos del mes</h3>
 
-  <div>
-    <a href="/egresos-del-mes/0">Enero</a>
-    <a href="/egresos-del-mes/1">Febrero</a>
-    <a href="/egresos-del-mes/2">Marzo</a>
-    <a href="/egresos-del-mes/3">Abril</a>
-    <a href="/egresos-del-mes/4">Mayo</a>
-    <a href="/egresos-del-mes/5">Junio</a>
-    <a href="/egresos-del-mes/6">Julio</a>
-    <a href="/egresos-del-mes/7">Agosto</a>
-    <a href="/egresos-del-mes/8">Septiembre</a>
-    <a href="/egresos-del-mes/9">Octubre</a>
-    <a href="/egresos-del-mes/10">Noviembre</a>
-    <a href="/egresos-del-mes/11">Diciembre</a>
+  <% if (month) { %>
+  <input type="hidden" value=<%= month %> id="month-hidden" />
+  <% } %>
+
+  <select class="form-select egresosMonthSelector" aria-label="Selector de mes" name="monthSelector">
+    <option value="0" class="month ene">Enero</option>
+    <option value="1" class="month feb">Febrero</option>
+    <option value="2" class="month mar">Marzo</option>
+    <option value="3" class="month abr">Abril</option>
+    <option value="4" class="month may">Mayo</option>
+    <option value="5" class="month jun">Junio</option>
+    <option value="6" class="month jul">Julio</option>
+    <option value="7" class="month ago">Agosto</option>
+    <option value="8" class="month sep">Septiembre</option>
+    <option value="9" class="month oct">Octubre</option>
+    <option value="10" class="month nov">Noviembre</option>
+    <option value="11" class="month dic">Diciembre</option>
+  </select>
+
+  <div class="container-gral-table">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th>Día</th>
+          <th>Categoría</th>
+          <th>Monto</th>
+          <th>Obs</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (egresos.length === 0) { %>
+        <tr>
+          <td colspan="5">No se registran egresos en este período</td>
+        </tr>
+        <% } else { %>
+        <% for( let i = 0; i < egresos.length; i++ ) { %>
+        <tr>
+          <td scope="col"><%= i + 1 %></td>
+          <td><%= egresos[i].date %></td>
+          <td><%= egresos[i].cat %></td>
+          <td>$ <%= egresos[i].value %></td>
+          <% if (egresos[i].obs === "") { %>
+          <td>-</th>
+            <% } else {%>
+          <td><%= egresos[i].obs %></td>
+          <% } %>
+        </tr>
+        <% } %>
+        <% } %>
+      </tbody>
+    </table>
   </div>
-
-  <table>
-    <tr>
-      <th>N°</th>
-      <th>Día</th>
-      <th>Categoría</th>
-      <th>Monto</th>
-      <th>Obs</th>
-    </tr>
-
-    <% if (egresos.length === 0) { %>
-    <tr>
-      <td colspan="5">No se registran egresos en este período</td>
-    </tr>
-    <% } else { %>
-    <% for( let i = 0; i < egresos.length; i++ ) { %>
-    <tr>
-      <td><%= i + 1 %></td>
-      <td><%= egresos[i].date %></td>
-      <td><%= egresos[i].cat %></td>
-      <td>$ <%= egresos[i].value %></td>
-      <% if (egresos[i].obs === "") { %>
-      <td>-</th>
-        <% } else {%>
-      <td><%= egresos[i].obs %></td>
-      <% } %>
-    </tr>
-    <% } %>
-    <% } %>
-  </table>
 
   <% let totalegresos = []; %>
   <% egresos.forEach(monto => { %>
