@@ -1,4 +1,7 @@
 const d = document;
+let nombreActual;
+let porcentajeActual;
+let allNames = [];
 
 // Verificación del porcentaje para inhabilitar los inputs y el btn Add
 if (d.querySelector("#total-asignado")) {
@@ -226,14 +229,30 @@ if (d.querySelector(".btn-avanzar")) {
 }
 
 // Edit modal handler function
-var porcentajeActual;
 if (d.querySelector(".total-asignado")) {
   porcentajeActual = Number(d.querySelector(".total-asignado").innerHTML);
 }
-var nombreActual;
 const editar = (id, nameCat, percCat) => {
+  let nameInput = d.querySelector(".nameInputAddCategory");
+  let percInput = d.querySelector(".percInputAddCategory");
+  let errorMsgNameRepetido = d.querySelector(".errorMsgNameRepetido");
+  let errorMsgInputName = d.querySelector(".errorMsgInputName");
+  let errorMsgInputPerc = d.querySelector(".errorMsgInputPerc");
+
+  nameInput.classList.contains("is-invalid") &&
+    nameInput.classList.remove("is-invalid");
+  percInput.classList.contains("is-invalid") &&
+    percInput.classList.remove("is-invalid");
+  errorMsgNameRepetido.classList.contains("errorMsgNameRepetido") &&
+    errorMsgNameRepetido.classList.add("hidden");
+  errorMsgInputName.classList.contains("errorMsgInputName") &&
+    errorMsgInputName.classList.add("hidden");
+  errorMsgInputPerc.classList.contains("errorMsgInputPerc") &&
+    errorMsgInputPerc.classList.add("hidden");
+
   porcentajeActual = porcentajeActual - Number(percCat);
   nombreActual = nameCat;
+
   let element = `
     <div class="childToRemove">
     <div class="modal-header">
@@ -390,7 +409,7 @@ if (d.querySelector(".container-form-new-move")) {
   });
 }
 
-// Submits handler
+// ---------- Submits handler ----------
 d.addEventListener("submit", (e) => {
   e.preventDefault();
 
@@ -522,11 +541,11 @@ d.addEventListener("submit", (e) => {
     }
 
     // Validación para que no se repita un nombre de categoría
-    let allNames = [];
     dataTr.forEach((data) => {
       allNames = [...allNames, data.getAttribute("id").toLowerCase()].sort();
     });
-    allNames = allNames.filter((word) => word !== nombreActual.toLowerCase());
+
+    allNames = allNames.filter((cat) => cat !== nombreActual.toLowerCase());
 
     if (allNames.includes(editNameInput[0].value.toLowerCase())) {
       errorMsgNameRepetidoEdit.classList.remove("hidden");
@@ -538,6 +557,7 @@ d.addEventListener("submit", (e) => {
       errorMsgNameRepetidoEdit.classList.remove("error");
       editNameInput[0].classList.remove("is-invalid");
     }
+    allNames = [...allNames, nombreActual];
 
     if (d.querySelector(".is-invalid")) {
       return;
@@ -627,7 +647,7 @@ d.addEventListener("submit", (e) => {
       errorMsgInputMount.classList.add("hidden");
     }
     swal({
-      title: "Ingreso agregado",
+      title: "Egreso agregado",
       icon: "success",
     });
     const swalBtn = d.querySelector(".swal-button");
@@ -665,14 +685,15 @@ const quitarCat = (id, name) => {
 
 // Clicks handler
 d.addEventListener("click", (e) => {
+  let trigger = e.target;
   // Handler btn avanzar de settings
   if (
-    e.target.matches(".btn-avanzar") ||
-    e.target.matches(".a-btn-avanzar") ||
-    e.target.matches(".icon") ||
-    e.target.matches(".svg-avanzar") ||
-    e.target.matches(".container-btn-avanzar") ||
-    e.target.matches(".btn-avanzar-disabled")
+    trigger.matches(".btn-avanzar") ||
+    trigger.matches(".a-btn-avanzar") ||
+    trigger.matches(".icon") ||
+    trigger.matches(".svg-avanzar") ||
+    trigger.matches(".container-btn-avanzar") ||
+    trigger.matches(".btn-avanzar-disabled")
   ) {
     e.preventDefault();
     let totalAsignado = d.querySelector(".total-asignado");
@@ -693,32 +714,26 @@ d.addEventListener("click", (e) => {
     location.href = "/main";
   }
 
+  // Cancelar agregado de movimiento
   if (
-    e.target.matches(".cancel-move-btn") ||
-    e.target.matches(".svg-cancel-move-btn") ||
-    e.target.matches(".span-cancel-move-btn") ||
-    e.target.matches(".path-cancel-move-btn")
+    trigger.matches(".cancel-move-btn") ||
+    trigger.matches(".svg-cancel-move-btn") ||
+    trigger.matches(".span-cancel-move-btn") ||
+    trigger.matches(".path-cancel-move-btn")
   ) {
     location.href = "/main";
   }
+
+  // Settings completado
   if (
-    e.target.matches(".container-btn-comenzar") ||
-    e.target.matches(".a-btn-comenzar") ||
-    e.target.matches(".btn-comenzar") ||
-    e.target.matches(".icon-comenzar") ||
-    e.target.matches(".path-btn-comenzar") ||
-    e.target.matches(".svg-comenzar")
+    trigger.matches(".container-btn-comenzar") ||
+    trigger.matches(".a-btn-comenzar") ||
+    trigger.matches(".btn-comenzar") ||
+    trigger.matches(".icon-comenzar") ||
+    trigger.matches(".path-btn-comenzar") ||
+    trigger.matches(".svg-comenzar")
   ) {
     location.href = "/settings";
-  }
-  if (
-    e.target.matches(".btn-cancelar-cambios-cat") ||
-    e.target.matches(".span-btn-cancelar-cambios")
-  ) {
-    const where = () => {
-      return d.querySelector(".navbar") ? "re-settings" : "settings";
-    };
-    location.href = where();
   }
 });
 
