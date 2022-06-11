@@ -8,8 +8,15 @@
   <div class="container-elements-body-pannel">
     <div class="container-saludo-pannel">
       <h3 class="primera-linea-saludo-pannel">¡Hola <%= user.nickName %>!</h3>
-      <h5 class="segunda-linea-saludo-pannel">¿Que operación querés registrar?</h5>
+      <h5 class="segunda-linea-saludo-pannel">¿Que operación querés registrar?
+        <!-- Button trigger modal -->
+        <button type="button" class="btn-instructivo" data-bs-toggle="modal" data-bs-target="#modalInstructivoPanel">
+          ?
+        </button>
+      </h5>
     </div>
+
+    <%- include("./fragments/modalInstructivoPanel") %>
 
     <div class="container-add-ingreso-pannel">
       <a href="/nuevo-ingreso">

@@ -340,6 +340,8 @@ h6 {
 .btn-instructivo {
   height: 35px;
   display: inline-block;
+  color: #fff;
+  text-align: center;
 }
 .cssbuttons-io-button-2 svg,
 .btn-cerrar-modal-about svg,
