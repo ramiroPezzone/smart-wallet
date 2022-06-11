@@ -296,10 +296,12 @@ gap: 10px;
 
 /* Btn Add Cats */
 /* From uiverse.io by @adamgiebl */
-.cssbuttons-io-button-2 span {
+.cssbuttons-io-button-2 span,
+.btn-cerrar-modal-about span {
   color: white;
 }
-.cssbuttons-io-button-2 {
+.cssbuttons-io-button-2,
+.btn-cerrar-modal-about {
   display: flex;
   align-items: center;
   font-family: inherit;
@@ -313,13 +315,16 @@ gap: 10px;
   letter-spacing: 0.05em;
   border-radius: 20em;
 }
-.cssbuttons-io-button-2 svg {
+.cssbuttons-io-button-2 svg,
+.btn-cerrar-modal-about svg {
   margin-right: 6px;
 }
-.cssbuttons-io-button-2:hover {
+.cssbuttons-io-button-2:hover,
+.btn-cerrar-modal-about:hover {
   box-shadow: 0 0.5em 1.5em -0.5em var(--eggplant);
 }
-.cssbuttons-io-button-2:active {
+.cssbuttons-io-button-2:active,
+.btn-cerrar-modal-about:active {
   box-shadow: 0 0.3em 1em -0.5em var(--eggplant);
 }
 /*  */
