@@ -43,12 +43,19 @@ h6 {
   font-size: 1.2rem !important;
 }
 /* Página de login */
-.container-index,
-.body-settings {
+.container-index {
+display: flex;
+flex-direction: column;
+justify-content: space-evenly;
+gap: 10px;
+}
+.container-elements-body-reSettings {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   gap: 10px;
+  min-height: 80vh;
+
 }
 .container-titulo-pantalla-principal {
   color: var(--eggplant);
@@ -147,6 +154,7 @@ h6 {
   margin: 0 auto;
   display: flex;
   justify-content: center;
+  margin-bottom: 20px;
 }
 .btn-lets-go,
 .a-btn-avanzar,
@@ -415,12 +423,31 @@ h6 {
 }
 .swal-button {
   padding: 7px 19px;
+  color: #fff;
   border-radius: 20em;
   background-color: var(--eggplant);
   font-size: 1rem;
   font-family: var(--primary-font);
   border: 1px solid var(--eggplant);
   text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
+}
+.swal-button--cancel {
+  background-color: var(--eggplant) !important;
+  font-family: var(--primary-font) !important;
+  font-weight: normal !important;
+  font-size: 1.1rem !important;
+}
+.swal-button--cancel:hover {
+  background-color: var(--eggplant-2) !important;
+  font-family: var(--primary-font) !important;
+  font-weight: normal !important;
+  font-size: 1.1rem !important;
+}
+.swal-button--danger {
+  background-color: var(--red) !important;
+}
+.swal-button--danger:hover {
+  background-color: var(--red-2) !important;
 }
 .swal-title {
   color: var(--eggplant);

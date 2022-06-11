@@ -185,7 +185,9 @@ if (d.querySelector("#isResseting")) {
   const customNavLink = d.querySelectorAll(".custom-nav-link");
   const logoNavbar = d.querySelector(".logo-navbar");
   let totalAsignado = d.querySelector(".total-asignado");
-  totalAsignado = Number(totalAsignado.innerText);
+  if (totalAsignado !== null) {
+    totalAsignado = Number(totalAsignado.innerText);
+  }
   if (totalAsignado !== 100) {
     customNavLink.forEach((link) => {
       link.removeAttribute("href");
@@ -212,7 +214,7 @@ if (d.querySelector(".btn-avanzar")) {
   if (totalAsignado === null || totalAsignado !== 100) {
     btnAvanzar.classList.remove("btn-avanzar");
     btnAvanzar.classList.add("btn-avanzar-disabled");
-    btnAvanzar.setAttribute("disabled", "");
+    // btnAvanzar.setAttribute("disabled", "");
   }
   if (totalAsignado === 100) {
     addBtn.classList.remove(".btn-avanzar");
@@ -647,24 +649,45 @@ d.addEventListener("change", (e) => {
   }
 });
 
+// Función de eliminación de categoría
+const quitarCat = (id, name) => {
+  swal({
+    title: `¿Querés eliminar la categoría "${name}"?`,
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  }).then((willDelete) => {
+    if (willDelete) {
+      location.href = `/settings/quitar-cat/${id}`;
+    }
+  });
+};
+
 // Clicks handler
 d.addEventListener("click", (e) => {
   // Handler btn avanzar de settings
   if (
     e.target.matches(".btn-avanzar") ||
+    e.target.matches(".a-btn-avanzar") ||
     e.target.matches(".icon") ||
-    e.target.matches(".svg-avanzar")
+    e.target.matches(".svg-avanzar") ||
+    e.target.matches(".container-btn-avanzar") ||
+    e.target.matches(".btn-avanzar-disabled")
   ) {
     e.preventDefault();
     let totalAsignado = d.querySelector(".total-asignado");
-    let msgRepartijaDePresupuesto = d.querySelector(
-      ".msgRepartijaDePresupuesto"
-    );
-    let checkTotal = totalAsignado.innerHTML;
-
-    if (checkTotal !== "100") {
-      msgRepartijaDePresupuesto.classList.remove("hidden");
-      msgRepartijaDePresupuesto.classList.add("msgErrorRepartijaDePresupuesto");
+    let checkTotal;
+    if (totalAsignado !== null) {
+      checkTotal = totalAsignado.innerHTML;
+    }
+    if (totalAsignado === null || checkTotal !== "100") {
+      swal({
+        title:
+          "Para continuar es necesario repartir el 100% del presupuesto entre todas las categorías que quieras",
+        text: "(Tené en cuenta que vas a poder modificarlo cuando lo necesites)",
+        icon: "info",
+        button: "Aceptar",
+      });
       return;
     }
     location.href = "/main";
