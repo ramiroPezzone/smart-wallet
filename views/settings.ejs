@@ -3,15 +3,17 @@
 <body class="body body-settings">
 
   <!-- Modal -->
-  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content add-to-modal">
-      </div>
-    </div>
-  </div>
   <!--  -->
+  <div class="container-title-y-btn-instructivo">
+    <h3 class="budget-ask">¿Cómo te gustaría dividir el presupuesto?
+      <button type="button" class="btn-instructivo" data-bs-toggle="modal" data-bs-target="#modalInstructivo">
+        <span>?</span>
+      </button>
+    </h3>
+  </div>
 
-  <h3 class="budget-ask">¿Cómo te gustaría dividir el presupuesto?</h3>
+  <!-- Modal instructivo -->
+  <%- include("./fragments/modalInstructivo") %>
 
   <% if (settings.length !== 0) { %>
   <div class="container-gral-table">

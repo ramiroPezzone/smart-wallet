@@ -44,10 +44,10 @@ h6 {
 }
 /* Página de login */
 .container-index {
-display: flex;
-flex-direction: column;
-justify-content: space-evenly;
-gap: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 10px;
 }
 .container-elements-body-reSettings {
   display: flex;
@@ -55,7 +55,6 @@ gap: 10px;
   justify-content: space-evenly;
   gap: 10px;
   min-height: 80vh;
-
 }
 .container-titulo-pantalla-principal {
   color: var(--eggplant);
@@ -270,9 +269,30 @@ gap: 10px;
 }
 
 /* Settings page */
-
+.presupuesto-de-ejemplo {
+  padding: 0 16px !important;
+  text-align: left;
+}
+.presupuesto-de-ejemplo-detalles {
+  text-align: left;
+  padding: 0 30px !important;
+}
+.container-ejemplo {
+  padding: 16px 0 !important;
+}
+.titulo-ejemplo {
+  padding-bottom: 8px;
+}
 .container-form-add-cat {
   max-width: 350px;
+  margin: 0 auto;
+}
+.container-title-y-btn-instructivo {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+  padding: 0 5px;
   margin: 0 auto;
 }
 .container-msg-errors {
@@ -297,11 +317,13 @@ gap: 10px;
 /* Btn Add Cats */
 /* From uiverse.io by @adamgiebl */
 .cssbuttons-io-button-2 span,
+.btn-instructivo span,
 .btn-cerrar-modal-about span {
   color: white;
 }
 .cssbuttons-io-button-2,
-.btn-cerrar-modal-about {
+.btn-cerrar-modal-about,
+.btn-instructivo {
   display: flex;
   align-items: center;
   font-family: inherit;
@@ -315,16 +337,23 @@ gap: 10px;
   letter-spacing: 0.05em;
   border-radius: 20em;
 }
+.btn-instructivo {
+  height: 35px;
+  display: inline-block;
+}
 .cssbuttons-io-button-2 svg,
-.btn-cerrar-modal-about svg {
+.btn-cerrar-modal-about svg,
+.btn-instructivo svg {
   margin-right: 6px;
 }
 .cssbuttons-io-button-2:hover,
-.btn-cerrar-modal-about:hover {
+.btn-cerrar-modal-about:hover,
+.btn-instructivo:hover {
   box-shadow: 0 0.5em 1.5em -0.5em var(--eggplant);
 }
 .cssbuttons-io-button-2:active,
-.btn-cerrar-modal-about:active {
+.btn-cerrar-modal-about:active,
+.btn-instructivo:active {
   box-shadow: 0 0.3em 1em -0.5em var(--eggplant);
 }
 /*  */
