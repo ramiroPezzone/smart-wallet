@@ -393,7 +393,7 @@ h6 {
 /*  */
 
 .container-gral-table {
-  max-width: 350px;
+  max-width: 600px;
   margin: 0 auto;
 }
 .titulo-tabla-cat {
@@ -437,7 +437,8 @@ h6 {
 .errorMsgEditPerc,
 .msgErrorRepartijaDePresupuesto,
 .msgPresupuestoSuperado,
-.errorMsgIngresoEgreso {
+.errorMsgIngresoEgreso,
+.errorMsgEditConcept {
   color: var(--red);
   text-align: left;
   margin-top: 5px;

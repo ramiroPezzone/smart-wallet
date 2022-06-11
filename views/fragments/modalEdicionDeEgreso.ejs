@@ -1,0 +1,37 @@
+<div class="modal fade" id="edit-egreso" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content add-to-modal">
+      <div class="modal-header">
+        <h5 class="modal-title">Editando egreso</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="separador-modal">
+      </div>
+      <form action="/guardar-edicion-de-egreso/<%= egresos._id %>" method="POST" id="form-edit-egreso">
+        <div class="container-form-add-cat">
+
+          <div class="form-floating mb-3 containerEditEgreso">
+            <input type="number" name="value" class="form-control editValueEgreso" id="floatingNumber" placeholder="Monto" min="0">
+            <label for="floatingNumber">Monto</label>
+            <div class="hidden errorMsgEditMount">Por favor, ingresá el monto</div>
+          </div>
+
+          <div class="form-floating mb-3 editObsEgreso">
+            <textarea name="obs" class="form-control obsInputEgreso" id="obsInputEgreso" placeholder="Observaciones"></textarea>
+            <label for="obsInputEgreso" class="form-label">Observaciones</label>
+          </div>
+
+        </div>
+        <div class="separador-modal">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-cancelar-cambios-cat" data-bs-dismiss="modal">
+            <span class="span-btn-cancelar-cambios">Cancelar</span>
+          </button>
+          <button type="submit" class="btn-cancelar-cambios-cat">
+            <span>Guardar cambios</span>
+          </button>
+        </div>
+    </div>
+  </div>
+</div>

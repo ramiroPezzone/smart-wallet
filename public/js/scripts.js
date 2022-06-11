@@ -2,6 +2,15 @@ const d = document;
 let nombreActual;
 let porcentajeActual;
 let allNames = [];
+let conceptInputEditIngreso;
+let valueInputEditIngreso;
+let formEditIngreso;
+let conceptTitleEdition;
+
+let valueInputEditEgreso;
+let editValueEgreso;
+let formEditEgreso;
+let obsInputEgreso;
 
 // Verificación del porcentaje para inhabilitar los inputs y el btn Add
 if (d.querySelector("#total-asignado")) {
@@ -264,13 +273,13 @@ const editar = (id, nameCat, percCat) => {
     <form action="/settings/update-cat/${id}" method="POST" id="form-edit-cat">
     <div class="container-form-add-cat">
     <div class="form-floating mb-3 ">
-    <input type="text" name="catName" class="form-control nameInputEditCategory" id="floatingInput" value="${nameCat}" placeholder:"Nombre de la categoría">
+    <input type="text" name="catName" class="form-control nameInputEditCategory" id="floatingInput" value="${nameCat}" placeholder="Nombre de la categoría">
     <label for="floatingInput">Nombre de la categoría</label>
     <div class="hidden errorMsgNameRepetidoEdit">Los nombres de las categorías no deben repetirse</div>
     <div class="hidden errorMsgEditName">El nombre no puede quedar vacío</div>
     </div>
     <div class="form-floating">
-    <input type="number" name="catPerc" class="form-control percInputEditCategory" id="floatingNumber" placeholder="Porcentaje" min="0" step="5" value="${percCat}">
+    <input type="number" name="catPerc" class="form-control percInputEditCategory" id="floatingNumber" placeholder="Porcentaje" min="0" value="${percCat}">
     <label for="floatingNumber">Porcentaje</label>
     <div class="hidden errorMsgEditPerc" style="margin-top: 10px;">El porcentaje asignado no puede quedar vacío</div>
     <div class="hidden errorMsgPresupuestoSuperado" style="margin-top: 10px;">El total de porcentaje no debe superar el 100%</div>
@@ -408,6 +417,117 @@ if (d.querySelector(".container-form-new-move")) {
     }
   });
 }
+
+// Edit ingresos blur handler
+if (d.querySelector("#form-edit-ingreso")) {
+  conceptInputEditIngreso = d.querySelector(".conceptInputEditIngreso");
+  valueInputEditIngreso = d.querySelector(".valueInputEditIngreso");
+  let errorMsgEditConcept = d.querySelector(".errorMsgEditConcept");
+  let errorMsgEditValue = d.querySelector(".errorMsgEditValue");
+
+  conceptInputEditIngreso.addEventListener("blur", (e) => {
+    if (conceptInputEditIngreso.value === "") {
+      conceptInputEditIngreso.classList.add("is-invalid");
+      errorMsgEditConcept.classList.remove("hidden");
+      errorMsgEditConcept.classList.add("error");
+      return;
+    } else {
+      conceptInputEditIngreso.classList.remove("is-invalid");
+      conceptInputEditIngreso.classList.add("is-valid");
+      errorMsgEditConcept.classList.add("hidden");
+      errorMsgEditConcept.classList.remove("error");
+    }
+  });
+  valueInputEditIngreso.addEventListener("blur", (e) => {
+    if (valueInputEditIngreso.value === "") {
+      valueInputEditIngreso.classList.add("is-invalid");
+      errorMsgEditValue.classList.remove("hidden");
+      errorMsgEditValue.classList.add("error");
+      return;
+    }
+    if (valueInputEditIngreso.value !== "") {
+      valueInputEditIngreso.classList.remove("is-invalid");
+      valueInputEditIngreso.classList.add("is-valid");
+      errorMsgEditValue.classList.add("hidden");
+      errorMsgEditValue.classList.remove("error");
+    }
+  });
+}
+
+// Edit egresos blur handler
+if (d.querySelector("#form-edit-egreso")) {
+  valueInputEditEgreso = d.querySelector(".editValueEgreso");
+  let errorMsgEditMount = d.querySelector(".errorMsgEditMount");
+
+  valueInputEditEgreso.addEventListener("blur", (e) => {
+    if (valueInputEditEgreso.value === "") {
+      valueInputEditEgreso.classList.add("is-invalid");
+      errorMsgEditMount.classList.remove("hidden");
+      errorMsgEditMount.classList.add("error");
+      return;
+    }
+    if (valueInputEditEgreso.value !== "") {
+      valueInputEditEgreso.classList.remove("is-invalid");
+      valueInputEditEgreso.classList.add("is-valid");
+      errorMsgEditMount.classList.add("hidden");
+      errorMsgEditMount.classList.remove("error");
+    }
+  });
+}
+
+// Function de editar ingreso
+const editarIngreso = (id, concept, value, obs) => {
+  conceptInputEditIngreso = d.querySelector(".conceptInputEditIngreso");
+  valueInputEditIngreso = d.querySelector(".valueInputEditIngreso");
+  obsInputIngreso = d.querySelector(".obsInputIngreso");
+  formEditIngreso = d.querySelector("#form-edit-ingreso");
+  conceptTitleEdition = d.querySelector(".conceptTitleEdition");
+
+  conceptInputEditIngreso.value = concept;
+  valueInputEditIngreso.value = value;
+  obsInputIngreso.value = obs;
+  formEditIngreso.action = `/guardar-edicion-de-ingreso/${id}`;
+  conceptTitleEdition.innerText = `"${concept}"`;
+};
+
+// Function de editar egreso
+const editarEgreso = (id, value, obs) => {
+  valueInputEditEgreso = d.querySelector(".editValueEgreso");
+  obsInputEgreso = d.querySelector(".obsInputEgreso");
+  let formEditEgreso = d.querySelector("#form-edit-egreso");
+
+  valueInputEditEgreso.value = value;
+  obsInputEgreso.value = obs;
+  formEditEgreso.action = `/guardar-edicion-de-egreso/${id}`;
+};
+
+// Function de eliminar ingreso
+const eliminarIngreso = (id, concept) => {
+  swal({
+    title: `¿Querés eliminar el ingreso "${concept}"?`,
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  }).then((willDelete) => {
+    if (willDelete) {
+      location.href = `/eliminar-ingreso/${id}`;
+    }
+  });
+};
+
+// Function de eliminar egreso
+const eliminarEgreso = (id, name) => {
+  swal({
+    title: `¿Querés eliminar el egreso "${name}"?`,
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  }).then((willDelete) => {
+    if (willDelete) {
+      location.href = `/eliminar-egreso/${id}`;
+    }
+  });
+};
 
 // ---------- Submits handler ----------
 d.addEventListener("submit", (e) => {
@@ -615,6 +735,7 @@ d.addEventListener("submit", (e) => {
     d.forms["formNvoIngreso"].submit();
   }
 
+  // Handler form Nuevo egreso
   if (e.target.matches("#formNvoEgreso")) {
     let errorMsgInputMount = d.querySelector(".errorMsgInputMount");
     let mountInputNewMove = d.querySelector(".mountInputNewMove");
@@ -654,6 +775,75 @@ d.addEventListener("submit", (e) => {
     swalBtn.classList.add("hidden");
 
     d.forms["formNvoEgreso"].submit();
+  }
+
+  // Handler form edición de ingreso
+  if (e.target.matches("#form-edit-ingreso")) {
+    conceptInputEditIngreso = d.querySelector(".conceptInputEditIngreso");
+    valueInputEditIngreso = d.querySelector(".valueInputEditIngreso");
+    obsInputIngreso = d.querySelector(".obsInputIngreso");
+    formEditIngreso = d.querySelector("#form-edit-ingreso");
+    let errorMsgEditConcept = d.querySelector(".errorMsgEditConcept");
+    let errorMsgEditValue = d.querySelector(".errorMsgEditValue");
+
+    if (conceptInputEditIngreso.value === "") {
+      conceptInputEditIngreso.classList.add("is-invalid");
+      errorMsgEditConcept.classList.remove("hidden");
+      errorMsgEditConcept.classList.add("error");
+      return;
+    } else {
+      conceptInputEditIngreso.classList.add("is-valid");
+      errorMsgEditConcept.classList.add("hidden");
+      errorMsgEditConcept.classList.remove("error");
+    }
+    if (valueInputEditIngreso.value === "") {
+      valueInputEditIngreso.classList.add("is-invalid");
+      errorMsgEditValue.classList.remove("hidden");
+      errorMsgEditValue.classList.add("error");
+      return;
+    } else {
+      valueInputEditIngreso.classList.add("is-valid");
+      errorMsgEditValue.classList.add("hidden");
+      errorMsgEditValue.classList.remove("error");
+    }
+
+    swal({
+      title: "Ingreso editado",
+      icon: "success",
+    });
+    const swalBtn = d.querySelector(".swal-button");
+    swalBtn.classList.add("hidden");
+
+    d.forms["form-edit-ingreso"].submit();
+  }
+
+  // Handler form edición de egreso
+  if (e.target.matches("#form-edit-egreso")) {
+    valueInputEditEgreso = d.querySelector(".editValueEgreso");
+    obsInputEgreso = d.querySelector(".obsInputEgreso");
+    editValueEgreso = d.querySelector(".editValueEgreso");
+
+    let errorMsgEditMount = d.querySelector(".errorMsgEditMount");
+
+    if (valueInputEditEgreso.value === "") {
+      editValueEgreso.classList.add("is-invalid");
+      errorMsgEditMount.classList.remove("hidden");
+      errorMsgEditMount.classList.add("error");
+      return;
+    } else {
+      editValueEgreso.classList.add("is-valid");
+      errorMsgEditMount.classList.add("hidden");
+      errorMsgEditMount.classList.remove("error");
+    }
+
+    swal({
+      title: "Egreso editado",
+      icon: "success",
+    });
+    const swalBtn = d.querySelector(".swal-button");
+    swalBtn.classList.add("hidden");
+
+    d.forms["form-edit-egreso"].submit();
   }
 });
 

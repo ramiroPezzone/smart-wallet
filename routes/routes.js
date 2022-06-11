@@ -21,6 +21,10 @@ router.get("/nuevo-egreso/:user", ensureAuth, go.nuevoEgreso);
 
 router.post("/nuevo-egreso/guardar", ensureAuth, go.guardarNvoEgreso);
 
+router.post("/guardar-edicion-de-ingreso/:id", ensureAuth, go.guardarEdicionDeIngreso);
+
+router.post("/guardar-edicion-de-egreso/:id", ensureAuth, go.guardarEdicionDeEgreso);
+
 router.get("/ingresos-del-mes", ensureAuth, go.verIngresosDelMes);
 
 router.get("/ingresos-del-mes/:month", ensureAuth, go.verIngresosDelMesX);
@@ -30,5 +34,10 @@ router.get("/egresos-del-mes", ensureAuth, go.verEgresosDelMes);
 router.get("/egresos-del-mes/:month", ensureAuth, go.verEgresosDelMesX);
 
 router.get("/re-settings", ensureAuth, go.reSettings);
+
+router.get("/eliminar-ingreso/:id", ensureAuth, go.eliminarIngreso);
+
+router.get("/eliminar-egreso/:id", ensureAuth, go.eliminarEgreso);
+
 
 module.exports = router;

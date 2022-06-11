@@ -1,0 +1,43 @@
+<div class="modal fade" id="edit-ingreso" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content add-to-modal">
+      <div class="modal-header">
+        <h5 class="modal-title">Editando <span class="conceptTitleEdition"></span></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="separador-modal">
+      </div>
+      <form action="/guardar-edicion-de-ingreso/<%= ingresos._id %>" method="POST" id="form-edit-ingreso">
+        <div class="container-form-add-cat">
+
+          <div class="form-floating mb-3 ">
+            <input type="text" name="concept" class="form-control conceptInputEditIngreso" id="floatingInput" value="<%= ingresos.concept %>" placeholder="Concepto">
+            <label for="floatingInput">Concepto</label>
+            <div class="hidden errorMsgEditConcept">Por favor, coloca una referencia</div>
+        </div>
+
+          <div class="form-floating mb-3">
+            <input type="number" name="value" class="form-control valueInputEditIngreso" id="floatingNumber" placeholder="Porcentaje" min="0">
+            <label for="floatingNumber">Valor</label>
+            <div class="hidden errorMsgEditValue">El valor no puede quedar en cero</div>
+          </div>
+
+          <div class="form-floating mb-3">
+            <textarea name="obs" class="form-control obsInputIngreso" id="obsEditIngreso" placeholder="Observaciones"></textarea>
+            <label for="obsNewMove" class="form-label">Observaciones</label>
+          </div>
+
+        </div>
+        <div class="separador-modal">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-cancelar-cambios-cat" data-bs-dismiss="modal">
+            <span class="span-btn-cancelar-cambios">Cancelar</span>
+          </button>
+          <button type="submit" class="btn-cancelar-cambios-cat">
+            <span>Guardar cambios</span>
+          </button>
+        </div>
+    </div>
+  </div>
+</div>

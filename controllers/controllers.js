@@ -1,7 +1,6 @@
 const UserSettings = require("../models/userSettings");
 const ingresos = require("../models/ingresos");
 const Egresos = require("../models/egresos");
-const egresos = require("../models/egresos");
 
 const controllers = {
   main: async (req, res) => {
@@ -93,10 +92,14 @@ const controllers = {
     let egresosUser = req.user._id;
     let month = new Date().getMonth();
     let verEgresos = await Egresos.find({ user: egresosUser });
+    let cats = await UserSettings.find({ user: user._id }).sort({
+      catPerc: "desc",
+    });
     res.render("egresosDelMes", {
       egresos: verEgresos,
       month,
       user,
+      cats,
     });
   },
   verIngresosDelMesX: async (req, res) => {
@@ -119,6 +122,35 @@ const controllers = {
       catPerc: "desc",
     });
     res.render("reSettings", { user, settings });
+  },
+  guardarEdicionDeIngreso: async (req, res) => {
+    let id = req.params;
+    let { concept, value, obs } = req.body;
+    await ingresos.findByIdAndUpdate(id.id, {
+      concept,
+      value,
+      obs,
+    });
+    res.redirect("back");
+  },
+  guardarEdicionDeEgreso: async (req, res) => {
+    let id = req.params;
+    let { value, obs } = req.body;
+    await Egresos.findByIdAndUpdate(id.id, {
+      value,
+      obs,
+    });
+    res.redirect("back");
+  },
+  eliminarIngreso: async (req, res) => {
+    let id = req.params;
+    await ingresos.findByIdAndDelete(id.id);
+    res.redirect("back");
+  },
+  eliminarEgreso: async (req, res) => {
+    let id = req.params;
+    await Egresos.findByIdAndDelete(id.id);
+    res.redirect("back");
   },
 };
 
