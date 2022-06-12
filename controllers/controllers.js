@@ -18,6 +18,12 @@ const controllers = {
   },
   settingsSave: async (req, res) => {
     let { catName, catPerc } = req.body;
+
+    // Generador de id único para category
+    const idCatPart1 = Date.now().toString(36);
+    const idCatPart2 = Math.random().toString(36).substring(2);
+    const idCategory = `${idCatPart1}${idCatPart2}`;
+
     catName = catName.trim();
     catName = catName[0].toUpperCase() + catName.slice(1);
     catPerc = catPerc.trim();
@@ -26,6 +32,7 @@ const controllers = {
     await UserSettings.create({
       user,
       catName,
+      idCategory,
       catPerc,
     });
     res.redirect("back");
@@ -71,9 +78,14 @@ const controllers = {
   guardarNvoEgreso: async (req, res) => {
     let user = req.user._id;
     let { cat, value, obs } = req.body;
+    let idCategory = cat.slice(-19).trim();
+    let lengthCatString = cat.length;
+    let cutTo = lengthCatString - 19;
+    cat = cat.slice(0, cutTo).trim();
     let nvoEgreso = {
       user,
       cat,
+      idCategory,
       value,
       obs,
     };
@@ -114,7 +126,10 @@ const controllers = {
     let userId = req.user._id;
     let month = req.params.month;
     let verEgresos = await Egresos.find({ user: userId, month: month });
-    res.render("egresosDelMes", { egresos: verEgresos, user, month });
+    let cats = await UserSettings.find({ user: user._id }).sort({
+      catPerc: "desc",
+    });
+    res.render("egresosDelMes", { egresos: verEgresos, user, month, cats });
   },
   reSettings: async (req, res) => {
     let user = req.user;
@@ -135,8 +150,14 @@ const controllers = {
   },
   guardarEdicionDeEgreso: async (req, res) => {
     let id = req.params;
-    let { value, obs } = req.body;
+    let { cat, value, obs } = req.body;
+    let idCategory = cat.slice(-19).trim();
+    let lengthCatString = cat.length;
+    let cutTo = lengthCatString - 19;
+    cat = cat.slice(0, cutTo).trim();
     await Egresos.findByIdAndUpdate(id.id, {
+      cat,
+      idCategory,
       value,
       obs,
     });

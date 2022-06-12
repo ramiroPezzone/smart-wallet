@@ -1,14 +1,23 @@
 <div class="modal fade" id="edit-egreso" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content add-to-modal">
-      <div class="modal-header">
-        <h5 class="modal-title">Editando egreso</h5>
+      <div class="modal-header modal-header-edit-egreso">
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title">Editando egreso de categoría</h5>
+        <div style="display: block !important;">
+          <h5 class="infoCatEditing"></h5>
+        </div>
       </div>
       <div class="separador-modal">
       </div>
       <form action="/guardar-edicion-de-egreso/<%= egresos._id %>" method="POST" id="form-edit-egreso">
         <div class="container-form-add-cat">
+          <select class="form-select mb-3 egresosSelector" aria-label="Selector de categoría" name="cat" id="cat">
+            <% cats.forEach(cat => { %>
+            <option value="<%= cat.catName %> <%= cat.idCategory %>" id="<%= cat.idCategory %>"><%= cat.catName %></option>
+            <% }) %>
+          </select>
+          <div class="hidden errorMsgCatSelect">Por favor, seleccioná una categoría</div>
 
           <div class="form-floating mb-3 containerEditEgreso">
             <input type="number" name="value" class="form-control editValueEgreso" id="floatingNumber" placeholder="Monto" min="0">

@@ -15,7 +15,7 @@
         <select class="form-select mb-3 egresosSelector" aria-label="Selector de categoría" name="cat" id="cat">
           <option value="choiceOne" selected>--Elegí una categoría--</option>
           <% cats.forEach(cat => { %>
-          <option value="<%= cat.catName %>"><%= cat.catName %></option>
+          <option value="<%= cat.catName %> <%= cat.idCategory %>"><%= cat.catName %></option>
           <% }) %>
         </select>
         <div class="hidden errorMsgCatSelect">Por favor, seleccioná una categoría</div>

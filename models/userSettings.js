@@ -13,6 +13,10 @@ const UserSettings = new mongoose.Schema({
     type: String,
     require: true,
   },
+  idCategory: {
+    type: String,
+    require: true,
+  },
   catPerc: {
     type: Number,
     require: true,

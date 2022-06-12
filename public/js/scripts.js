@@ -11,6 +11,7 @@ let valueInputEditEgreso;
 let editValueEgreso;
 let formEditEgreso;
 let obsInputEgreso;
+let categoryEditEgreso;
 
 // Verificación del porcentaje para inhabilitar los inputs y el btn Add
 if (d.querySelector("#total-asignado")) {
@@ -142,7 +143,7 @@ if (d.querySelector("#month-hidden")) {
 
   switch (monthSelected) {
     case 0:
-      ene.addAttribute("selected", "");
+      ene.setAttribute("selected", "");
       ene.classList.add("selected");
       break;
     case 1:
@@ -237,6 +238,13 @@ if (d.querySelector(".btn-avanzar")) {
   }
 }
 
+// Automatización del colspan de tablas de ver ingresos y egresos
+if (d.querySelector(".noRegisteredMovements")) {
+  const noRegisteredMovements = d.querySelector(".noRegisteredMovements");
+  const thTags = d.querySelectorAll("th");
+  noRegisteredMovements.setAttribute("colspan", `${thTags.length}`);
+}
+
 // Edit modal handler function
 if (d.querySelector(".total-asignado")) {
   porcentajeActual = Number(d.querySelector(".total-asignado").innerHTML);
@@ -301,6 +309,17 @@ const editar = (id, nameCat, percCat) => {
   let modal = d.querySelector(".add-to-modal");
   modal.insertAdjacentHTML("afterbegin", element);
 };
+
+// Remove edit modal con tecla esc
+d.addEventListener("keyup", (e) => {
+  if (d.querySelector(".childToRemove")) {
+    const childToRemove = d.querySelector(".childToRemove");
+    const addToModal = d.querySelector(".add-to-modal");
+    if (e.code === "Escape") {
+      addToModal.removeChild(childToRemove);
+    }
+  }
+});
 
 // Remove edit modal handler function
 const quitarElementoHTML = () => {
@@ -491,11 +510,15 @@ const editarIngreso = (id, concept, value, obs) => {
 };
 
 // Function de editar egreso
-const editarEgreso = (id, value, obs) => {
+const editarEgreso = (id, idCategory, categoryName, value, obs) => {
   valueInputEditEgreso = d.querySelector(".editValueEgreso");
   obsInputEgreso = d.querySelector(".obsInputEgreso");
   let formEditEgreso = d.querySelector("#form-edit-egreso");
+  let catSelected = d.querySelector(`#${idCategory}`);
+  let titleModal = d.querySelector(".infoCatEditing");
 
+  titleModal.innerText = categoryName;
+  catSelected.setAttribute("selected", "");
   valueInputEditEgreso.value = value;
   obsInputEgreso.value = obs;
   formEditEgreso.action = `/guardar-edicion-de-egreso/${id}`;
@@ -516,9 +539,9 @@ const eliminarIngreso = (id, concept) => {
 };
 
 // Function de eliminar egreso
-const eliminarEgreso = (id, name) => {
+const eliminarEgreso = (id, categoryName) => {
   swal({
-    title: `¿Querés eliminar el egreso "${name}"?`,
+    title: `¿Querés eliminar el egreso de la categoría "${categoryName}"?`,
     icon: "warning",
     buttons: true,
     dangerMode: true,
@@ -822,6 +845,7 @@ d.addEventListener("submit", (e) => {
     valueInputEditEgreso = d.querySelector(".editValueEgreso");
     obsInputEgreso = d.querySelector(".obsInputEgreso");
     editValueEgreso = d.querySelector(".editValueEgreso");
+    categoryEditEgreso = d.querySelector("#cat");
 
     let errorMsgEditMount = d.querySelector(".errorMsgEditMount");
 
@@ -924,15 +948,5 @@ d.addEventListener("click", (e) => {
     trigger.matches(".svg-comenzar")
   ) {
     location.href = "/settings";
-  }
-});
-
-// Anulando funcion btn esc
-d.addEventListener("keyup", (e) => {
-  if (e.code === "Escape") {
-    const where = () => {
-      return d.querySelector(".navbar") ? "re-settings" : "settings";
-    };
-    location.href = where();
   }
 });

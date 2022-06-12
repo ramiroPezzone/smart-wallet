@@ -17,6 +17,10 @@ const Egreso = new mongoose.Schema({
     type: String,
     require: true,
   },
+  idCategory: {
+    type: String,
+    require: true,
+  },
   value: {
     type: Number,
     require: true,

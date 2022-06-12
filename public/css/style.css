@@ -642,6 +642,10 @@ h6 {
   margin-top: 25px;
   color: var(--eggplant);
 }
+.modal-header-edit-egreso {
+  display: flex !important;
+  flex-direction: column !important;
+}
 textarea {
   resize: none !important;
   height: 150px !important;
