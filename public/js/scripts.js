@@ -238,10 +238,17 @@ if (d.querySelector(".btn-avanzar")) {
   }
 }
 
-// Automatización del colspan de tablas de ver ingresos y egresos
+// Automatización del colspan de tablas de ver ingresos y egresos e inhabilitación del selector de orden si no hay registros
 if (d.querySelector(".noRegisteredMovements")) {
   const noRegisteredMovements = d.querySelector(".noRegisteredMovements");
   const thTags = d.querySelectorAll("th");
+  const orderSelector = d.querySelector(".orderSelector");
+  const valueOrderHidden = d.querySelector(".value-order-hidden");
+
+  if (valueOrderHidden === null) {
+    orderSelector.setAttribute("disabled", "");
+  }
+
   noRegisteredMovements.setAttribute("colspan", `${thTags.length}`);
 }
 

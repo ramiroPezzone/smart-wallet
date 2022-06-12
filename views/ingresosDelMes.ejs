@@ -10,8 +10,8 @@
   <input type="hidden" value=<%= month %> id="month-hidden" />
   <% } %>
   <% if (order) { %>
-    <input type="hidden" value=<%= order %> id="order-ingresos-hidden" />
-    <% } %>
+  <input type="hidden" value=<%= order %> id="order-ingresos-hidden" class="value-order-hidden" />
+  <% } %>
 
   <select class="form-select ingresosMonthSelector" aria-label="Selector de mes" name="monthSelector">
     <option value="0" class="month ene">Enero</option>
@@ -32,7 +32,7 @@
     <div class="title-order-by">
       <p>Ordenar por:</p>
     </div>
-    <select class="form-select ordenarIngresosPor selector" aria-label="Ordenar por" name="ordenarIngresosPor">
+    <select class="form-select ordenarIngresosPor orderSelector" aria-label="Ordenar por" name="ordenarIngresosPor">
       <option value="day-desc" class="opcionOrdenarIngresos day-desc">Día - Desc (↓)</option>
       <option value="day-asc" class="opcionOrdenarIngresos day-asc">Día - Asc (↑)</option>
       <option value="concept-desc" class="opcionOrdenarIngresos concept-desc">Concepto - Desc (↓)</option>
@@ -69,7 +69,7 @@
           <td><%= ingresos[i].value %></td>
           <% if (ingresos[i].obs === "") { %>
           <td>-</td>
-            <% } else {%>
+          <% } else {%>
           <td><%= ingresos[i].obs %></td>
           <% } %>
           <td>

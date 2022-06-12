@@ -10,7 +10,7 @@
   <input type="hidden" value=<%= month %> id="month-hidden" />
   <% } %>
   <% if (order) { %>
-  <input type="hidden" value=<%= order %> id="order-egresos-hidden" />
+  <input type="hidden" value=<%= order %> id="order-egresos-hidden" class="value-order-hidden"/>
   <% } %>
 
   <select class="form-select egresosMonthSelector selector" aria-label="Selector de mes" name="monthSelector">
@@ -32,7 +32,7 @@
     <div class="title-order-by">
       <p>Ordenar por:</p>
     </div>
-    <select class="form-select ordenarEgresosPor selector" aria-label="Ordenar por" name="ordenarEgresosPor">
+    <select class="form-select ordenarEgresosPor orderSelector" aria-label="Ordenar por" name="ordenarEgresosPor">
       <option value="day-desc" class="opcionOrdenarEgresos day-desc">Día - Desc (↓)</option>
       <option value="day-asc" class="opcionOrdenarEgresos day-asc">Día - Asc (↑)</option>
       <option value="categoryName-desc" class="opcionOrdenarEgresos categoryName-desc">Categoría - Desc (↓)</option>
