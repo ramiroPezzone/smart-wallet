@@ -96,14 +96,16 @@ const controllers = {
     let user = req.user;
     let userId = req.user._id;
     let month = new Date().getMonth();
+    let order;
     let verIngresos = await ingresos.find({ user: userId });
-    res.render("ingresosDelMes", { ingresos: verIngresos, user, month });
+    res.render("ingresosDelMes", { ingresos: verIngresos, user, month, order });
   },
   verEgresosDelMes: async (req, res) => {
     let user = req.user;
     let egresosUser = req.user._id;
     let month = new Date().getMonth();
     let verEgresos = await Egresos.find({ user: egresosUser });
+    let order;
     let cats = await UserSettings.find({ user: user._id }).sort({
       catPerc: "desc",
     });
@@ -112,6 +114,7 @@ const controllers = {
       month,
       user,
       cats,
+      order,
     });
   },
   verIngresosDelMesX: async (req, res) => {
@@ -173,17 +176,97 @@ const controllers = {
     await Egresos.findByIdAndDelete(id.id);
     res.redirect("back");
   },
-  orderEgresosBy: async (req, res) => {
-    let option = req.params;
+  orderEgresosByDay: async (req, res) => {
+    let { option } = req.params;
     let user = req.user;
-    let sortBy = { option: 1 };
-    let egresos = await Egresos.find({ user: user._id }).sort(sortBy);
+    let egresos = await Egresos.find({ user: user._id }).sort({ date: option });
+    let month = new Date().getMonth();
+    let order = `day${option}`;
     let cats = await UserSettings.find({ user: user._id }).sort({
       catPerc: "desc",
     });
-    res.render("egresosDelMes", { egresos, user, cats });
-
-    res.render("");
+    res.render("egresosDelMes", { egresos, user, cats, month, order });
+  },
+  orderEgresosByCategory: async (req, res) => {
+    let { option } = req.params;
+    let user = req.user;
+    let egresos = await Egresos.find({ user: user._id }).sort({ cat: option });
+    let month = new Date().getMonth();
+    let order = `category${option}`;
+    let cats = await UserSettings.find({ user: user._id }).sort({
+      catPerc: "desc",
+    });
+    res.render("egresosDelMes", { egresos, user, cats, month, order });
+  },
+  orderEgresosByAmount: async (req, res) => {
+    let { option } = req.params;
+    let user = req.user;
+    let month = new Date().getMonth();
+    let order = `amount${option}`;
+    let egresos = await Egresos.find({ user: user._id }).sort({
+      value: option,
+    });
+    let cats = await UserSettings.find({ user: user._id }).sort({
+      catPerc: "desc",
+    });
+    res.render("egresosDelMes", { egresos, user, cats, month, order });
+  },
+  orderIngresosByDay: async (req, res) => {
+    let { option } = req.params;
+    let user = req.user;
+    let ingresosInOrder = await ingresos
+      .find({ user: user._id })
+      .sort({ date: option });
+    let month = new Date().getMonth();
+    let order = `day${option}`;
+    let cats = await UserSettings.find({ user: user._id }).sort({
+      catPerc: "desc",
+    });
+    res.render("ingresosDelMes", {
+      ingresos: ingresosInOrder,
+      user,
+      cats,
+      month,
+      order,
+    });
+  },
+  orderIngresosByConcept: async (req, res) => {
+    let { option } = req.params;
+    let user = req.user;
+    let ingresosInOrder = await ingresos
+      .find({ user: user._id })
+      .sort({ cat: option });
+    let month = new Date().getMonth();
+    let order = `concept${option}`;
+    let cats = await UserSettings.find({ user: user._id }).sort({
+      catPerc: "desc",
+    });
+    res.render("ingresosDelMes", {
+      ingresos: ingresosInOrder,
+      user,
+      cats,
+      month,
+      order,
+    });
+  },
+  orderIngresosByAmount: async (req, res) => {
+    let { option } = req.params;
+    let user = req.user;
+    let month = new Date().getMonth();
+    let order = `amount${option}`;
+    let ingresosInOrder = await ingresos.find({ user: user._id }).sort({
+      value: option,
+    });
+    let cats = await UserSettings.find({ user: user._id }).sort({
+      catPerc: "desc",
+    });
+    res.render("ingresosDelMes", {
+      ingresos: ingresosInOrder,
+      user,
+      cats,
+      month,
+      order,
+    });
   },
 };
 

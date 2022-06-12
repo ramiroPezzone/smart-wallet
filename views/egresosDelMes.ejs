@@ -9,6 +9,9 @@
   <% if (month) { %>
   <input type="hidden" value=<%= month %> id="month-hidden" />
   <% } %>
+  <% if (order) { %>
+  <input type="hidden" value=<%= order %> id="order-egresos-hidden" />
+  <% } %>
 
   <select class="form-select egresosMonthSelector selector" aria-label="Selector de mes" name="monthSelector">
     <option value="0" class="month ene">Enero</option>
@@ -25,20 +28,19 @@
     <option value="11" class="month dic">Diciembre</option>
   </select>
 
-  <!-- <div class="container-selector-order-by">
+  <div class="container-selector-order-by">
     <div class="title-order-by">
       <p>Ordenar por:</p>
     </div>
     <select class="form-select ordenarEgresosPor selector" aria-label="Ordenar por" name="ordenarEgresosPor">
-      <option value="day" class="opcionOrdenarEgresos day">Día</option>
-      <option value="categoryName" class="opcionOrdenarEgresos categoryName">Categoría</option>
-      <option value="amount" class="opcionOrdenarEgresos amount">Monto</option>
+      <option value="day-desc" class="opcionOrdenarEgresos day-desc">Día - Desc (↓)</option>
+      <option value="day-asc" class="opcionOrdenarEgresos day-asc">Día - Asc (↑)</option>
+      <option value="categoryName-desc" class="opcionOrdenarEgresos categoryName-desc">Categoría - Desc (↓)</option>
+      <option value="categoryName-asc" class="opcionOrdenarEgresos categoryName-asc">Categoría - Asc (↑)</option>
+      <option value="amount-desc" class="opcionOrdenarEgresos amount-desc">Monto - Desc (↓)</option>
+      <option value="amount-asc" class="opcionOrdenarEgresos amount-asc">Monto - Asc (↑)</option>
     </select>
-    <select class="form-select ordenarEgresosDeManera selector" aria-label="Ordenar de manera" name="ordenarEgresosDeManera">
-      <option value="asc" class="opcionOrdenarEgresosDeManera asc">Asc</option>
-      <option value="desc" class="opcionOrdenarEgresosDeManera desc">Desc</option>
-    </select>
-  </div> -->
+  </div>
 
   <div class="container-gral-table">
     <table class="table table-striped table-hover">
@@ -84,7 +86,6 @@
               </svg>
             </a>
           </td>
-
         </tr>
         <% } %>
         <% } %>

@@ -39,7 +39,17 @@ router.get("/eliminar-ingreso/:id", ensureAuth, go.eliminarIngreso);
 
 router.get("/eliminar-egreso/:id", ensureAuth, go.eliminarEgreso);
 
-router.get("/order-egresos-by-category/:option", ensureAuth, go.orderEgresosBy);
+router.get("/order-ingresos-by-day/:option", ensureAuth, go.orderIngresosByDay);
+
+router.get("/order-ingresos-by-concept/:option", ensureAuth, go.orderIngresosByConcept);
+
+router.get("/order-ingresos-by-amount/:option", ensureAuth, go.orderIngresosByAmount);
+
+router.get("/order-egresos-by-day/:option", ensureAuth, go.orderEgresosByDay);
+
+router.get("/order-egresos-by-category/:option", ensureAuth, go.orderEgresosByCategory);
+
+router.get("/order-egresos-by-amount/:option", ensureAuth, go.orderEgresosByAmount);
 
 
 module.exports = router;

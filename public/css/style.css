@@ -515,7 +515,7 @@ h6 {
 /*  */
 
 .container-gral-table {
-  width: 90%;
+  /* width: 90%; */
   max-width: 600px;
   margin: 0 auto;
 }

@@ -437,22 +437,114 @@ if (d.querySelector(".container-form-new-move")) {
   });
 }
 
+// Setter de la opción correcta en el selector de orden
+if (d.querySelector("#order-egresos-hidden")) {
+  let optionCategoryDesc = d.querySelector(".categoryName-desc");
+  let optionCategoryAsc = d.querySelector(".categoryName-asc");
+  let orderHidden = d.querySelector("#order-egresos-hidden");
+  let optionAmountDesc = d.querySelector(".amount-desc");
+  let optionAmountAsc = d.querySelector(".amount-asc");
+  let optionDayDesc = d.querySelector(".day-desc");
+  let optionDayAsc = d.querySelector(".day-asc");
+  valueOrderHidden = orderHidden.value;
+
+  if (valueOrderHidden === "day-1") {
+    optionDayAsc.setAttribute("selected", "");
+  }
+  if (valueOrderHidden === "day1") {
+    optionDayDesc.setAttribute("selected", "");
+  }
+  if (valueOrderHidden === "category-1") {
+    optionCategoryAsc.setAttribute("selected", "");
+  }
+  if (valueOrderHidden === "category1") {
+    optionCategoryDesc.setAttribute("selected", "");
+  }
+  if (valueOrderHidden === "amount-1") {
+    optionAmountAsc.setAttribute("selected", "");
+  }
+  if (valueOrderHidden === "amount1") {
+    optionAmountDesc.setAttribute("selected", "");
+  }
+}
+if (d.querySelector("#order-ingresos-hidden")) {
+  let optionConceptDesc = d.querySelector(".concept-desc");
+  let optionConceptAsc = d.querySelector(".concept-asc");
+  let orderHidden = d.querySelector("#order-ingresos-hidden");
+  let optionAmountDesc = d.querySelector(".amount-desc");
+  let optionAmountAsc = d.querySelector(".amount-asc");
+  let optionDayDesc = d.querySelector(".day-desc");
+  let optionDayAsc = d.querySelector(".day-asc");
+  valueOrderHidden = orderHidden.value;
+
+  if (valueOrderHidden === "day-1") {
+    optionDayAsc.setAttribute("selected", "");
+  }
+  if (valueOrderHidden === "day1") {
+    optionDayDesc.setAttribute("selected", "");
+  }
+  if (valueOrderHidden === "concept-1") {
+    optionConceptAsc.setAttribute("selected", "");
+  }
+  if (valueOrderHidden === "concept1") {
+    optionConceptDesc.setAttribute("selected", "");
+  }
+  if (valueOrderHidden === "amount-1") {
+    optionAmountAsc.setAttribute("selected", "");
+  }
+  if (valueOrderHidden === "amount1") {
+    optionAmountDesc.setAttribute("selected", "");
+  }
+}
+
 // Listener de changes de selectores
 d.addEventListener("change", (e) => {
+  // Selector de ordenar egresos
   if (e.target.matches(".ordenarEgresosPor")) {
     let orderBySelector = d.querySelector(".ordenarEgresosPor");
 
-    console.log(orderBySelector.value);
-    if(orderBySelector.value === "day") {
-      // location.href = `/order-egresos-by-day/${orderBySelector.value}`;
+    if (orderBySelector.value === "day-asc") {
+      location.href = "/order-egresos-by-day/-1";
     }
-    if(orderBySelector.value === "categoryName") {
-      // location.href = `/order-egresos-by-category/${orderBySelector.value}`;
+    if (orderBySelector.value === "day-desc") {
+      location.href = "/order-egresos-by-day/1";
     }
-    if(orderBySelector.value === "amount") {
-      // location.href = `/order-egresos-by-category/${orderBySelector.value}`;
+    if (orderBySelector.value === "categoryName-asc") {
+      location.href = "/order-egresos-by-category/-1";
     }
+    if (orderBySelector.value === "categoryName-desc") {
+      location.href = "/order-egresos-by-category/1";
+    }
+    if (orderBySelector.value === "amount-asc") {
+      location.href = "/order-egresos-by-amount/-1";
+    }
+    if (orderBySelector.value === "amount-desc") {
+      location.href = "/order-egresos-by-amount/1";
+    }
+  }
 
+  // Selector de ordenar ingresos
+  if (e.target.matches(".ordenarIngresosPor")) {
+    let orderBySelector = d.querySelector(".ordenarIngresosPor");
+
+    if (orderBySelector.value === "day-asc") {
+      location.href = "/order-ingresos-by-day/-1";
+    }
+    if (orderBySelector.value === "day-desc") {
+      location.href = "/order-ingresos-by-day/1";
+    }
+    if (orderBySelector.value === "concept-asc") {
+      location.href = "/order-ingresos-by-concept/-1";
+    }
+    if (orderBySelector.value === "concept-desc") {
+      location.href = "/order-ingresos-by-concept/1";
+    }
+    if (orderBySelector.value === "amount-asc") {
+      location.href = "/order-ingresos-by-amount/-1";
+    }
+    if (orderBySelector.value === "amount-desc") {
+      location.href = "/order-ingresos-by-amount/1";
+    }
   }
 });
 
