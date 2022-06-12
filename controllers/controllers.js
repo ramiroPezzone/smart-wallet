@@ -121,18 +121,20 @@ const controllers = {
     let user = req.user;
     let userId = req.user._id;
     let month = req.params.month;
+    let order;
     let verIngresos = await ingresos.find({ user: userId, month: month });
-    res.render("ingresosDelMes", { ingresos: verIngresos, user, month });
+    res.render("ingresosDelMes", { ingresos: verIngresos, user, month, order });
   },
   verEgresosDelMesX: async (req, res) => {
     let user = req.user;
     let userId = req.user._id;
     let month = req.params.month;
+    let order;
     let verEgresos = await Egresos.find({ user: userId, month: month });
     let cats = await UserSettings.find({ user: user._id }).sort({
       catPerc: "desc",
     });
-    res.render("egresosDelMes", { egresos: verEgresos, user, month, cats });
+    res.render("egresosDelMes", { egresos: verEgresos, user, month, cats, order });
   },
   reSettings: async (req, res) => {
     let user = req.user;
