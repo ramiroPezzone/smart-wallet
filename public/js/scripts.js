@@ -437,6 +437,25 @@ if (d.querySelector(".container-form-new-move")) {
   });
 }
 
+// Listener de changes de selectores
+d.addEventListener("change", (e) => {
+  if (e.target.matches(".ordenarEgresosPor")) {
+    let orderBySelector = d.querySelector(".ordenarEgresosPor");
+
+    console.log(orderBySelector.value);
+    if(orderBySelector.value === "day") {
+      // location.href = `/order-egresos-by-day/${orderBySelector.value}`;
+    }
+    if(orderBySelector.value === "categoryName") {
+      // location.href = `/order-egresos-by-category/${orderBySelector.value}`;
+    }
+    if(orderBySelector.value === "amount") {
+      // location.href = `/order-egresos-by-category/${orderBySelector.value}`;
+    }
+
+  }
+});
+
 // Edit ingresos blur handler
 if (d.querySelector("#form-edit-ingreso")) {
   conceptInputEditIngreso = d.querySelector(".conceptInputEditIngreso");

@@ -173,6 +173,18 @@ const controllers = {
     await Egresos.findByIdAndDelete(id.id);
     res.redirect("back");
   },
+  orderEgresosBy: async (req, res) => {
+    let option = req.params;
+    let user = req.user;
+    let sortBy = { option: 1 };
+    let egresos = await Egresos.find({ user: user._id }).sort(sortBy);
+    let cats = await UserSettings.find({ user: user._id }).sort({
+      catPerc: "desc",
+    });
+    res.render("egresosDelMes", { egresos, user, cats });
+
+    res.render("");
+  },
 };
 
 module.exports = controllers;
