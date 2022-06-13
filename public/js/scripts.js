@@ -244,12 +244,14 @@ if (d.querySelector(".noRegisteredMovements")) {
   const thTags = d.querySelectorAll("th");
   const orderSelector = d.querySelector(".orderSelector");
   const valueOrderHidden = d.querySelector(".value-order-hidden");
+  const pOrderBy = d.querySelector(".p-order-by");
 
   if (valueOrderHidden === null) {
     orderSelector.setAttribute("disabled", "");
   }
 
   noRegisteredMovements.setAttribute("colspan", `${thTags.length}`);
+  pOrderBy.style.color = "var(--gray)";
 }
 
 // Edit modal handler function
