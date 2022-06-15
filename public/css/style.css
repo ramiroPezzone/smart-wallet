@@ -18,6 +18,7 @@
   --styled-font: "Rouge Script", cursive;
 }
 
+/* Loader */
 /* From uiverse.io by @e-coders */
 @keyframes ldio-4j5ay0xf86g {
   0% {
@@ -135,6 +136,10 @@
 }
 /* Fin styles del loader */
 
+*::selection {
+  background-color: var(--eggplant);
+  color: var(--marigold);
+}
 * {
   padding: 0;
   margin: 0;
@@ -875,6 +880,15 @@ textarea {
     left: -110px !important;
   }
 }
+
 .orderSelector:disabled {
   color: var(--gray-2);
+}
+
+/* Clase para evitar selección de texto */
+.no-seleccionable {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }

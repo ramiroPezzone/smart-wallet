@@ -28,11 +28,11 @@
     <option value="11" class="month dic">Diciembre</option>
   </select>
 
-  <div class="container-selector-order-by">
+  <div class="container-selector-order-by no-seleccionable">
     <div class="title-order-by">
-      <p  class="p-order-by">Ordenar por:</p>
+      <p  class="p-order-by no-seleccionable">Ordenar por:</p>
     </div>
-    <select class="form-select ordenarIngresosPor orderSelector" aria-label="Ordenar por" name="ordenarIngresosPor">
+    <select class="form-select ordenarIngresosPor orderSelector no-seleccionable" aria-label="Ordenar por" name="ordenarIngresosPor">
       <option value="day-desc" class="opcionOrdenarIngresos day-desc">Día - Desc (↓)</option>
       <option value="day-asc" class="opcionOrdenarIngresos day-asc">Día - Asc (↑)</option>
       <option value="concept-desc" class="opcionOrdenarIngresos concept-desc">Concepto - Desc (↓)</option>
@@ -104,7 +104,7 @@
   <% }) %>
   <% let resultado = totalIngresos.reduce((prev, curr) => prev + curr, 0 )%>
 
-  <p>Total de ingresos: $ <span><%= resultado %></span></p>
+  <h6>Total de ingresos: $ <span><%= resultado %></span></h6>
 
   <%- include("./fragments/scripts") %>
 </body>

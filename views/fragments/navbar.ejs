@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-custom">
   <div class="container-fluid">
     <a class="navbar-brand custom-nav-link" href="/main">
-      <img src="/imgs/logo smart wallet.png" alt="logo smart wallet" width="40" height="40" class="logo-navbar">
+      <img src="/imgs/logo smart wallet.png" alt="logo smart wallet" width="40" height="40" class="logo-navbar no-seleccionable">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -9,15 +9,15 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link custom-nav-link" href="/main">Inicio</a>
+          <a class="nav-link custom-nav-link no-seleccionable" href="/main">Inicio</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle custom-nav-link" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle custom-nav-link no-seleccionable" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Ver movimientos
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item custom-link-navbar" href="/ingresos-del-mes">Ingresos del mes</a></li>
-            <li><a class="dropdown-item custom-link-navbar" href="/egresos-del-mes">Egresos del mes</a></li>
+            <li><a class="dropdown-item custom-link-navbar no-seleccionable" href="/ingresos-del-mes">Ingresos del mes</a></li>
+            <li><a class="dropdown-item custom-link-navbar no-seleccionable" href="/egresos-del-mes">Egresos del mes</a></li>
           </ul>
         </li>
       </ul>
@@ -25,18 +25,18 @@
         <div class="collapse navbar-collapse" id="navbarText">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle custom-nav-link" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a class="nav-link dropdown-toggle custom-nav-link no-seleccionable" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Mi cuenta
               </a>
               <ul class="dropdown-menu container-options-mi-cuenta" aria-labelledby="navbarDropdownMenuLink">
                 <div class="container-data-user">
-                  <p class="name-in-navbar"><%= user.nickName %></p>
-                  <img src="<%= user.image %>" alt="foto perfil" class="foto-perfil-user-navbar">
+                  <p class="name-in-navbar no-seleccionable"><%= user.nickName %></p>
+                  <img src="<%= user.image %>" alt="foto perfil" class="foto-perfil-user-navbar no-seleccionable">
                 </div>
                 <hr>
-                <li><a class="dropdown-item custom-link-navbar" href="/re-settings">Configurar presupuesto</a></li>
+                <li><a class="dropdown-item custom-link-navbar no-seleccionable" href="/re-settings">Configurar presupuesto</a></li>
                 <li>
-                  <a class="dropdown-item logout-option custom-link-navbar" href="/auth/logout">
+                  <a class="dropdown-item logout-option custom-link-navbar no-seleccionable" href="/auth/logout">
                     <div>
                       Logout
                     </div>
@@ -49,7 +49,7 @@
                   </a>
                 </li>
                 <hr>
-                <li><a type="button" class="dropdown-item custom-link-navbar" data-bs-toggle="modal" data-bs-target="#modalAbout">Acerca de</a></li>
+                <li><a type="button" class="dropdown-item custom-link-navbar no-seleccionable" data-bs-toggle="modal" data-bs-target="#modalAbout">Acerca de</a></li>
               </ul>
             </li>
           </ul>

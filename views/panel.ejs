@@ -7,8 +7,8 @@
 
   <div class="container-elements-body-pannel">
     <div class="container-saludo-pannel">
-      <h3 class="primera-linea-saludo-pannel">¡Hola <%= user.nickName %>!</h3>
-      <h5 class="segunda-linea-saludo-pannel">¿Que operación querés registrar?
+      <h3 class="primera-linea-saludo-pannel no-seleccionable">¡Hola <%= user.nickName %>!</h3>
+      <h5 class="segunda-linea-saludo-pannel no-seleccionable">¿Que operación querés registrar?
         <!-- Button trigger modal -->
         <button type="button" class="btn-instructivo" data-bs-toggle="modal" data-bs-target="#modalInstructivoPanel">
           ?
@@ -18,7 +18,7 @@
 
     <%- include("./fragments/modalInstructivoPanel") %>
 
-    <div class="container-add-ingreso-pannel">
+    <div class="container-add-ingreso-pannel no-seleccionable">
       <a href="/nuevo-ingreso">
         <button class="btnAddIngreso">
           <span>Nuevo ingreso</span>
@@ -29,7 +29,7 @@
       </a>
     </div>
 
-    <div class="container-add-egreso-pannel">
+    <div class="container-add-egreso-pannel no-seleccionable">
       <a href="/nuevo-egreso/<%= user._id %>">
         <button class="btnAddEgreso">
           <span>Nuevo egreso</span>

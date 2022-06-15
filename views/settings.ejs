@@ -62,7 +62,7 @@
     <% }) %>
     <% let resultado = totalPerc.reduce((prev, curr) => prev + curr, 0 )%>
     <div class="container-total-asignado">
-      <p>Total asignado: <span class="total-asignado"><%= resultado %></span><span>%</span></p>
+      <h6>Total asignado: <span class="total-asignado"><%= resultado %></span><span>%</span></h6>
     </div>
   </div>
   <% } %>
@@ -86,7 +86,7 @@
       </div>
     </div>
 
-    <div class="container-add-btn">
+    <div class="container-add-btn no-seleccionable">
       <button type="submit" class="cssbuttons-io-button-2 add-btn">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
           <path fill="none" d="M0 0h24v24H0z"></path>
@@ -97,7 +97,7 @@
     </div>
   </form>
 
-  <div class="container-btn-avanzar">
+  <div class="container-btn-avanzar no-seleccionable">
     <a class="a-btn-avanzar">
       <button class="btn-avanzar">Avanzar
         <div class="icon">
