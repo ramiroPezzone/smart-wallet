@@ -20,6 +20,7 @@ const controllers = {
   },
   settingsSave: async (req, res) => {
     let { catName, catPerc } = req.body;
+    let allMonths = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
     // Generador de id único para category
     const idCatPart1 = Date.now().toString(36);
     const idCatPart2 = Math.random().toString(36).substring(2);
@@ -36,16 +37,18 @@ const controllers = {
       catPerc,
     });
 
-    let nvoTotalesEgreso = {
-      user,
-      idCategory,
-      observaciones: "",
-      nameCategory: catName,
-      categoryPercentage: catPerc,
-      values: 0,
-    };
-
-    await DBTotalEgresos.create(nvoTotalesEgreso);
+    allMonths.forEach((month) => {
+      let nvoTotalesEgreso = {
+        user,
+        idCategory,
+        observaciones: "",
+        nameCategory: catName,
+        categoryPercentage: catPerc,
+        values: 0,
+        month,
+      };
+      DBTotalEgresos.create(nvoTotalesEgreso);
+    });
 
     res.redirect("back");
   },
@@ -382,7 +385,7 @@ const controllers = {
   resumen: async (req, res) => {
     const user = req.user;
     const month = req.params.month;
-    const infoIngresos = await DBIngresos.find({ user: user._id });
+    const infoIngresos = await DBIngresos.find({ user: user._id, month });
     const totalEgresos = await DBTotalEgresos.find({
       user: user._id,
       month: month,
