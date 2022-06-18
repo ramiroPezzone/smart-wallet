@@ -15,9 +15,11 @@
         <select class="form-select mb-3 egresosSelector" aria-label="Selector de categoría" name="cat" id="cat">
           <option value="choiceOne" selected>--Elegí una categoría--</option>
           <% cats.forEach(cat => { %>
-          <option value="<%= cat.catName %> <%= cat.idCategory %>"><%= cat.catName %></option>
+          <option value="<%= cat.catName %> <%= cat.idCategory %>" id="<%= cat.catName %> <%= cat.idCategory %>" percentage="<%= cat.catPerc %>"><%= cat.catName %></option>
           <% }) %>
         </select>
+        <input type="hidden" id="percentageHidden" name="categoryPercentage">
+        <span class="categorySelected"></span>
         <div class="hidden errorMsgCatSelect">Por favor, seleccioná una categoría</div>
 
         <div class="form-floating mb-3 containerMountNewMove">

@@ -16,6 +16,7 @@
   --gray-2: rgb(165, 165, 165);
   --primary-font: "Tiro Gurmukhi", serif;
   --styled-font: "Rouge Script", cursive;
+  --navbar-font: "Jost", sans-serif;
 }
 
 /* Loader */
@@ -154,7 +155,7 @@ p {
   background-color: var(--marigold);
   min-height: calc(100vh - 14vh);
   font-family: var(--primary-font);
-  color: var(--royal-blue-dark);
+  color: var(--eggplant);
   text-align: center;
 }
 h3 {
@@ -168,6 +169,17 @@ h5 {
 }
 h6 {
   font-size: 1.2rem !important;
+}
+.containerResumenFinal {
+  max-width: 300px;
+  margin: 0 auto;
+}
+.container-flex-row {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: space-between;
+  max-width: 100%;
 }
 /* Página de login */
 .container-index {
@@ -435,10 +447,16 @@ h6 {
   font-weight: bold;
   font-size: 1.2rem;
 }
-.container-add-btn {
-  margin-top: 15px;
+.container-add-btn,
+.container-add-observaciones {
+  margin: 15px 0;
   display: flex;
   justify-content: center;
+}
+.container-title-obs-y-editar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 /* Btn Add Cats */
@@ -711,6 +729,7 @@ h6 {
 /* Navbar */
 .navbar-custom {
   box-shadow: 0 0 20px 3px var(--eggplant);
+  margin-bottom: 25px;
 }
 .link-navbar:active {
   background-color: var(--marigold) !important;
@@ -722,12 +741,15 @@ h6 {
 .nav-item > a,
 .dropdown-item {
   color: var(--eggplant-3) !important;
+  font-family: var(--navbar-font);
   font-size: 1.1rem;
   font-weight: bold;
 }
 .logout-option > div {
   display: inline-block;
   margin-right: 10px;
+  font-family: var(--navbar-font);
+  color: var(--eggplant);
 }
 .container-data-user {
   display: flex;
@@ -763,13 +785,6 @@ h6 {
 /*  */
 
 /* Ingresos y Egresos del mes */
-.body-ingresos-del-mes h3,
-.body-egresos-del-mes h3,
-.body-settings h3,
-.body-form-ingreso-o-egreso h3 {
-  margin-top: 25px;
-  color: var(--eggplant);
-}
 .modal-header-edit-egreso {
   display: flex !important;
   flex-direction: column !important;
@@ -779,6 +794,7 @@ textarea {
   height: 150px !important;
 }
 .ingresosMonthSelector,
+.resumenMonthSelector,
 .egresosMonthSelector {
   max-width: 350px;
   margin: 20px auto;
@@ -891,4 +907,18 @@ textarea {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+/* Saldos */
+.table-resumen {
+  margin-top: 30px;
+}
+
+.table-resumen p,
+.table-resumen h6 {
+  text-align: left;
+  margin: 0;
+}
+#obs-empty {
+  text-align: center;
 }

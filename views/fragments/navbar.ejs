@@ -8,16 +8,29 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link custom-nav-link no-seleccionable" href="/main">Inicio</a>
-        </li>
+
+
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle custom-nav-link no-seleccionable" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Ver movimientos
+            Nuevo
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item custom-link-navbar no-seleccionable" href="/ingresos-del-mes">Ingresos del mes</a></li>
-            <li><a class="dropdown-item custom-link-navbar no-seleccionable" href="/egresos-del-mes">Egresos del mes</a></li>
+            <li><a class="dropdown-item custom-link-navbar no-seleccionable" href="/nuevo-ingreso">Ingreso</a></li>
+            <li><a class="dropdown-item custom-link-navbar no-seleccionable" href="/nuevo-egreso/<%= user._id %>">Egreso</a></li>
+          </ul>
+        </li>
+
+
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle custom-nav-link no-seleccionable" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Ver movimientos del mes
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item custom-link-navbar no-seleccionable" href="/ingresos-del-mes">Ingresos</a></li>
+            <li><a class="dropdown-item custom-link-navbar no-seleccionable" href="/egresos-del-mes">Egresos</a></li>
+            <% let currentMonth = new Date().getMonth() %>
+            <li><a class="dropdown-item custom-link-navbar no-seleccionable" href="/resumen/<%= currentMonth %>">Resumen</a></li>
           </ul>
         </li>
       </ul>

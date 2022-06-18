@@ -13,6 +13,159 @@ let formEditEgreso;
 let obsInputEgreso;
 let categoryEditEgreso;
 
+// Asignación del title en mes del resumen
+if (d.querySelector(".resumenMonthSelector")) {
+  let monthHidden = d.querySelector("#valueMonthHidden");
+  let titleMonthModal = d.querySelector(".spanMonthTitleModal");
+  let spanMonthTitleAgregandoObs = d.querySelector(
+    "#spanMonthTitleAgregandoObs"
+  );
+  monthHidden = Number(monthHidden.value);
+  let currentMont = new Date().getMonth();
+
+  let ene = d.querySelector(".ene");
+  let feb = d.querySelector(".feb");
+  let mar = d.querySelector(".mar");
+  let abr = d.querySelector(".abr");
+  let may = d.querySelector(".may");
+  let jun = d.querySelector(".jun");
+  let jul = d.querySelector(".jul");
+  let ago = d.querySelector(".ago");
+  let sep = d.querySelector(".sep");
+  let oct = d.querySelector(".oct");
+  let nov = d.querySelector(".nov");
+  let dic = d.querySelector(".dic");
+  switch (currentMont) {
+    case 0:
+      ene.classList.add("current");
+      break;
+    case 1:
+      feb.classList.add("current");
+      break;
+    case 2:
+      mar.classList.add("current");
+      break;
+    case 3:
+      abr.classList.add("current");
+      break;
+    case 4:
+      may.classList.add("current");
+      break;
+    case 5:
+      jun.classList.add("current");
+      break;
+    case 6:
+      jul.classList.add("current");
+      break;
+    case 7:
+      ago.classList.add("current");
+      break;
+    case 8:
+      sep.classList.add("current");
+      break;
+    case 9:
+      oct.classList.add("current");
+      break;
+    case 10:
+      nov.classList.add("current");
+      break;
+    case 11:
+      dic.classList.add("current");
+      break;
+  }
+  switch (monthHidden) {
+    case 0:
+      ene.setAttribute("Selected", "");
+      ene.classList.add("selected");
+      ene.classList.add("current");
+      titleMonthModal.innerText = "Enero";
+      spanMonthTitleAgregandoObs.innerText = "Enero";
+      break;
+    case 1:
+      feb.setAttribute("Selected", "");
+      feb.classList.add("selected");
+      feb.classList.add("current");
+      titleMonthModal.innerText = "Febrero";
+      spanMonthTitleAgregandoObs.innerText = "Febrero";
+      break;
+    case 2:
+      mar.setAttribute("Selected", "");
+      mar.classList.add("selected");
+      mar.classList.add("current");
+      titleMonthModal.innerText = "Marzo";
+      spanMonthTitleAgregandoObs.innerText = "Marzo";
+      break;
+    case 3:
+      abr.setAttribute("Selected", "");
+      abr.classList.add("selected");
+      abr.classList.add("current");
+      titleMonthModal.innerText = "Abril";
+      spanMonthTitleAgregandoObs.innerText = "Abril";
+      break;
+    case 4:
+      may.setAttribute("Selected", "");
+      may.classList.add("selected");
+      may.classList.add("current");
+      titleMonthModal.innerText = "Mayo";
+      spanMonthTitleAgregandoObs.innerText = "Mayo";
+      break;
+    case 5:
+      jun.setAttribute("Selected", "");
+      jun.classList.add("selected");
+      jun.classList.add("current");
+      titleMonthModal.innerText = "Junio";
+      spanMonthTitleAgregandoObs.innerText = "Junio";
+      break;
+    case 6:
+      jul.setAttribute("Selected", "");
+      jul.classList.add("selected");
+      jul.classList.add("current");
+      titleMonthModal.innerText = "Julio";
+      spanMonthTitleAgregandoObs.innerText = "Julio";
+      break;
+    case 7:
+      ago.setAttribute("Selected", "");
+      ago.classList.add("selected");
+      ago.classList.add("current");
+      titleMonthModal.innerText = "Agosto";
+      spanMonthTitleAgregandoObs.innerText = "Agosto";
+      break;
+    case 8:
+      sep.setAttribute("Selected", "");
+      sep.classList.add("selected");
+      sep.classList.add("current");
+      titleMonthModal.innerText = "Septiembre";
+      spanMonthTitleAgregandoObs.innerText = "Septiembre";
+      break;
+    case 9:
+      oct.setAttribute("Selected", "");
+      oct.classList.add("selected");
+      oct.classList.add("current");
+      titleMonthModal.innerText = "Octubre";
+      spanMonthTitleAgregandoObs.innerText = "Octubre";
+      break;
+    case 10:
+      nov.setAttribute("Selected", "");
+      nov.classList.add("selected");
+      nov.classList.add("current");
+      titleMonthModal.innerText = "Noviembre";
+      spanMonthTitleAgregandoObs.innerText = "Noviembre";
+      break;
+    case 11:
+      dic.setAttribute("Selected", "");
+      dic.classList.add("selected");
+      dic.classList.add("current");
+      titleMonthModal.innerText = "Diciembre";
+      spanMonthTitleAgregandoObs.innerText = "Diciembre";
+      break;
+  }
+}
+if (d.querySelector("#tdResumenNoHayMovimientos")) {
+  let totalDeTh = d.querySelectorAll("th");
+  let tdResumenNoHayMovimientos = d.querySelector("#tdResumenNoHayMovimientos");
+  tdResumenNoHayMovimientos.setAttribute("colspan", totalDeTh.length);
+}
+
 // Verificación del porcentaje para inhabilitar los inputs y el btn Add
 if (d.querySelector("#total-asignado")) {
   let totalAsignado = d.querySelector("#total-asignado");
@@ -258,7 +411,7 @@ if (d.querySelector(".noRegisteredMovements")) {
 if (d.querySelector(".total-asignado")) {
   porcentajeActual = Number(d.querySelector(".total-asignado").innerHTML);
 }
-const editar = (id, nameCat, percCat) => {
+const editar = (id, nameCat, percCat, idCategory) => {
   let nameInput = d.querySelector(".nameInputAddCategory");
   let percInput = d.querySelector(".percInputAddCategory");
   let errorMsgNameRepetido = d.querySelector(".errorMsgNameRepetido");
@@ -288,6 +441,7 @@ const editar = (id, nameCat, percCat) => {
     <div class="separador-modal">
     </div>
     <form action="/settings/update-cat/${id}" method="POST" id="form-edit-cat">
+    <input type="hidden" value="${idCategory}" name="idCategory"></input>
     <div class="container-form-add-cat">
     <div class="form-floating mb-3 ">
     <input type="text" name="catName" class="form-control nameInputEditCategory" id="floatingInput" value="${nameCat}" placeholder="Nombre de la categoría">
@@ -414,7 +568,15 @@ if (d.querySelector(".container-form-new-move")) {
   });
 
   // Select validations
-  egresosSelector.addEventListener("change", () => {
+  egresosSelector.addEventListener("change", (e) => {
+    let categorySelected = d.querySelector(".categorySelected");
+    let categoryValue = e.target.value;
+    let lengthCatString = categoryValue.length;
+    let cutTo = lengthCatString - 19;
+    categoryValue = categoryValue.slice(0, cutTo).trim();
+
+    categorySelected.innerText = categoryValue;
+
     if (egresosSelector.value === "choiceOne") {
       egresosSelector.classList.add("is-invalid");
       egresosSelector.classList.remove("is-valid");
@@ -653,6 +815,13 @@ const eliminarIngreso = (id, concept) => {
     dangerMode: true,
   }).then((willDelete) => {
     if (willDelete) {
+      swal({
+        title: "Ingreso eliminado",
+        icon: "success",
+      });
+      const swalBtn = d.querySelector(".swal-button");
+      swalBtn.classList.add("hidden");
+
       location.href = `/eliminar-ingreso/${id}`;
     }
   });
@@ -667,10 +836,19 @@ const eliminarEgreso = (id, categoryName) => {
     dangerMode: true,
   }).then((willDelete) => {
     if (willDelete) {
+      swal({
+        title: "Egreso eliminado",
+        icon: "success",
+      });
+      const swalBtn = d.querySelector(".swal-button");
+      swalBtn.classList.add("hidden");
       location.href = `/eliminar-egreso/${id}`;
     }
   });
 };
+
+// Función editar observación de resumen
+const editarObservacion = () => {};
 
 // ---------- Submits handler ----------
 d.addEventListener("submit", (e) => {
@@ -989,6 +1167,28 @@ d.addEventListener("submit", (e) => {
 
     d.forms["form-edit-egreso"].submit();
   }
+
+  // Form agregar observación a resumen mensual
+  if (e.target.matches("#form-agregar-obs-resumen")) {
+    swal({
+      title: "Observación agregada",
+      icon: "success",
+    });
+    const swalBtn = d.querySelector(".swal-button");
+    swalBtn.classList.add("hidden");
+
+    d.forms["form-agregar-obs-resumen"].submit();
+  }
+  // Form Editar observación de resumen mensual
+  if (e.target.matches("#form-editar-obs-resumen"))
+    swal({
+      title: "Observación editada",
+      icon: "success",
+    });
+  const swalBtn = d.querySelector(".swal-button");
+  swalBtn.classList.add("hidden");
+
+  d.forms["form-editar-obs-resumen"].submit();
 });
 
 // onChanges handler
@@ -1001,10 +1201,21 @@ d.addEventListener("change", (e) => {
     let monthSelected = e.target.value;
     location.href = `/egresos-del-mes/${monthSelected}`;
   }
+  // Asignación del porcentage al input tipo hidden del formulario de nuevo egreso
+  if (e.target.matches("#cat")) {
+    let optionSelected = d.getElementById(`${e.target.value}`);
+    let inputPercentageHidden = d.getElementById("percentageHidden");
+    let percentageToAsign = optionSelected.getAttribute("percentage");
+    inputPercentageHidden.value = percentageToAsign;
+  }
+  if (e.target.matches(".resumenMonthSelector")) {
+    let monthSelected = e.target.value;
+    location.href = `/resumen/${monthSelected}`;
+  }
 });
 
 // Función de eliminación de categoría
-const quitarCat = (id, name) => {
+const quitarCat = (id, name, idCategory) => {
   swal({
     title: `¿Querés eliminar la categoría "${name}"?`,
     icon: "warning",
@@ -1012,7 +1223,14 @@ const quitarCat = (id, name) => {
     dangerMode: true,
   }).then((willDelete) => {
     if (willDelete) {
-      location.href = `/settings/quitar-cat/${id}`;
+      swal({
+        title: "Categoría eliminada",
+        icon: "success",
+      });
+      const swalBtn = d.querySelector(".swal-button");
+      swalBtn.classList.add("hidden");
+
+      location.href = `/settings/quitar-cat/${id}&${idCategory}`;
     }
   });
 };

@@ -9,7 +9,7 @@ router.get("/settings", ensureAuth, go.settings);
 
 router.post("/settings/save", ensureAuth, go.settingsSave);
 
-router.get("/settings/quitar-cat/:id", ensureAuth, go.quitarCat);
+router.get("/settings/quitar-cat/:id&:idCategory", ensureAuth, go.quitarCat);
 
 router.post("/settings/update-cat/:id", ensureAuth, go.updateCat);
 
@@ -21,9 +21,17 @@ router.get("/nuevo-egreso/:user", ensureAuth, go.nuevoEgreso);
 
 router.post("/nuevo-egreso/guardar", ensureAuth, go.guardarNvoEgreso);
 
-router.post("/guardar-edicion-de-ingreso/:id", ensureAuth, go.guardarEdicionDeIngreso);
+router.post(
+  "/guardar-edicion-de-ingreso/:id",
+  ensureAuth,
+  go.guardarEdicionDeIngreso
+);
 
-router.post("/guardar-edicion-de-egreso/:id", ensureAuth, go.guardarEdicionDeEgreso);
+router.post(
+  "/guardar-edicion-de-egreso/:id",
+  ensureAuth,
+  go.guardarEdicionDeEgreso
+);
 
 router.get("/ingresos-del-mes", ensureAuth, go.verIngresosDelMes);
 
@@ -41,15 +49,44 @@ router.get("/eliminar-egreso/:id", ensureAuth, go.eliminarEgreso);
 
 router.get("/order-ingresos-by-day/:option", ensureAuth, go.orderIngresosByDay);
 
-router.get("/order-ingresos-by-concept/:option", ensureAuth, go.orderIngresosByConcept);
+router.get(
+  "/order-ingresos-by-concept/:option",
+  ensureAuth,
+  go.orderIngresosByConcept
+);
 
-router.get("/order-ingresos-by-amount/:option", ensureAuth, go.orderIngresosByAmount);
+router.get(
+  "/order-ingresos-by-amount/:option",
+  ensureAuth,
+  go.orderIngresosByAmount
+);
 
 router.get("/order-egresos-by-day/:option", ensureAuth, go.orderEgresosByDay);
 
-router.get("/order-egresos-by-category/:option", ensureAuth, go.orderEgresosByCategory);
+router.get(
+  "/order-egresos-by-category/:option",
+  ensureAuth,
+  go.orderEgresosByCategory
+);
 
-router.get("/order-egresos-by-amount/:option", ensureAuth, go.orderEgresosByAmount);
+router.get(
+  "/order-egresos-by-amount/:option",
+  ensureAuth,
+  go.orderEgresosByAmount
+);
 
+router.get("/resumen/:month", ensureAuth, go.resumen);
+
+router.post(
+  "/guardar-observacion-resumen",
+  ensureAuth,
+  go.guardarObservacionResumen
+);
+
+router.post(
+  "/editar-observacion-resumen/:id",
+  ensureAuth,
+  go.editarObservacionResumen
+);
 
 module.exports = router;

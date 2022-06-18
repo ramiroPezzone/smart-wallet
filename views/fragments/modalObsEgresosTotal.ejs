@@ -1,0 +1,34 @@
+<div class="modal fade" id="agregar-observacion-resumen" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content add-to-modal">
+      <div class="modal-header modal-header-agregar-observacion-resumen">
+        <h5 class="modal-title">Agregando observaciones de resumen del mes de <span id="spanMonthTitleAgregandoObs"></span></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div style="display: block !important;">
+          <h5 class="infoCatEditing"></h5>
+        </div>
+      </div>
+      <div class="separador-modal">
+      </div>
+      <form action="/guardar-observacion-resumen" method="POST" id="form-agregar-obs-resumen">
+        <div class="container-form-add-cat">
+          <div class="form-floating mb-3 editObsEgreso">
+            <textarea name="observaciones" class="form-control observaciones" id="observaciones" placeholder="Observaciones"></textarea>
+            <label for="observaciones" class="form-label">Observaciones</label>
+          </div>
+        </div>
+        <div class="separador-modal">
+        </div>
+        <div class="modal-footer no-seleccionable">
+          <input type="hidden" value="<%= month %>" name="month">
+          <button type="button" class="btn-cancelar-cambios-cat" data-bs-dismiss="modal">
+            <span class="span-btn-cancelar-cambios">Cancelar</span>
+          </button>
+          <button type="submit" class="btn-editar-observaciones-resumen btn-cancelar-cambios-cat">
+            <span>Guardar cambios</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
