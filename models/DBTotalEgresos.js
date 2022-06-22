@@ -28,6 +28,10 @@ const totalEgreso = new mongoose.Schema({
     type: Number,
     require: true,
   },
+  year: {
+    type: String,
+    default: new Date().getFullYear(),
+  },
   month: {
     type: String,
     default: new Date().getMonth(),

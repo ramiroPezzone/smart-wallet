@@ -24,11 +24,14 @@
             <label for="floatingNumber">Monto</label>
             <div class="hidden errorMsgEditMount">Por favor, ingresá el monto</div>
           </div>
-
+          
           <div class="form-floating mb-3 editObsEgreso">
             <textarea name="obs" class="form-control obsInputEgreso" id="obsInputEgreso" placeholder="Observaciones"></textarea>
             <label for="obsInputEgreso" class="form-label">Observaciones</label>
           </div>
+          <!-- Inputs hidden -->
+          <input type="hidden" name="valueEgresoHidden" class="editValueEgresoHidden">
+          <input type="hidden" name="monthHidden" class="editMonthHidden">
 
         </div>
         <div class="separador-modal">

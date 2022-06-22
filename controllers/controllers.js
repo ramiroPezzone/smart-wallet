@@ -3,6 +3,7 @@ const DBObseracionesResumen = require("../models/DBObservacionesResumen");
 const DBIngresos = require("../models/DBIngresos");
 const DBEgresos = require("../models/DBEgresos");
 const DBTotalEgresos = require("../models/DBTotalEgresos");
+const { find } = require("../models/DBUserSettings");
 
 const controllers = {
   main: async (req, res) => {
@@ -36,7 +37,6 @@ const controllers = {
       catName,
       catPerc,
     });
-
     allMonths.forEach((month) => {
       let nvoTotalesEgreso = {
         user,
@@ -49,13 +49,12 @@ const controllers = {
       };
       DBTotalEgresos.create(nvoTotalesEgreso);
     });
-
     res.redirect("back");
   },
   quitarCat: async (req, res) => {
     let { id, idCategory } = req.params;
     await DBuserSettings.findByIdAndDelete(id);
-    await DBTotalEgresos.findOneAndDelete({ idCategory });
+    await DBTotalEgresos.find({ idCategory });
     res.redirect("back");
   },
   updateCat: async (req, res) => {
@@ -132,6 +131,7 @@ const controllers = {
     let cutTo = lengthCatString - 19;
     cat = cat.slice(0, cutTo).trim();
 
+    let month = new Date().getMonth();
     let values = 0;
     value = Number(value);
 
@@ -141,9 +141,9 @@ const controllers = {
       idCategory,
       value,
       obs,
+      month,
     };
 
-    let month = new Date().getMonth();
     let queryTotalEgresos = await DBTotalEgresos.find({
       idCategory: idCategory,
       month: month,
@@ -154,21 +154,30 @@ const controllers = {
       let valuesEnDB = queryTotalEgresos[0].values;
       values = valuesEnDB + value;
     }
+
+    await DBEgresos.create(nvoEgreso);
+
     let nvosTotalesEgreso = {
       user,
       idCategory,
       nameCategory: cat,
       categoryPercentage,
       values,
+      month,
     };
-    await DBEgresos.create(nvoEgreso);
 
-    queryTotalEgresos.length === 0
-      ? await DBTotalEgresos.create(nvosTotalesEgreso)
-      : await DBTotalEgresos.findOneAndUpdate(
-          { idCategory: idCategory },
-          nvosTotalesEgreso
-        );
+    if (queryTotalEgresos.length === 0) {
+      await DBTotalEgresos.create(nvosTotalesEgreso);
+    } else {
+      const IDegresoAEditar = await DBTotalEgresos.findOne({
+        idCategory,
+        month,
+      });
+      await DBTotalEgresos.findByIdAndUpdate(
+        IDegresoAEditar._id,
+        nvosTotalesEgreso
+      );
+    }
 
     res.redirect("/main");
   },
@@ -258,7 +267,9 @@ const controllers = {
   },
   guardarEdicionDeEgreso: async (req, res) => {
     let id = req.params;
-    let { cat, value, obs } = req.body;
+    let user = req.user._id;
+
+    let { cat, value, obs, valueEgresoHidden, monthHidden } = req.body;
     value = value.trim();
     if (obs !== "") {
       obs = obs.trim();
@@ -274,6 +285,22 @@ const controllers = {
       value,
       obs,
     });
+
+    const registroDeEgresoAEditar = await DBTotalEgresos.findOne({
+      user,
+      idCategory,
+      month: monthHidden,
+    });
+
+    let valueToEdit = registroDeEgresoAEditar.values;
+
+    let result =
+      Number(valueToEdit) - Number(valueEgresoHidden) + Number(value);
+
+    await DBTotalEgresos.findByIdAndUpdate(registroDeEgresoAEditar._id, {
+      values: result,
+    });
+
     res.redirect("back");
   },
   eliminarIngreso: async (req, res) => {
@@ -282,8 +309,20 @@ const controllers = {
     res.redirect("back");
   },
   eliminarEgreso: async (req, res) => {
-    let id = req.params;
-    await DBEgresos.findByIdAndDelete(id.id);
+    let user = req.user._id;
+    let { id, idCategory, month, value } = req.params;
+    value = Number(value);
+    await DBEgresos.findByIdAndDelete(id);
+    let egresoARestarle = await DBTotalEgresos.findOne({
+      user,
+      nameCategory: idCategory,
+      month,
+    });
+    let resultado = egresoARestarle.values - value;
+    await DBTotalEgresos.findByIdAndUpdate(egresoARestarle._id, {
+      values: resultado,
+    });
+
     res.redirect("back");
   },
   orderEgresosByDay: async (req, res) => {

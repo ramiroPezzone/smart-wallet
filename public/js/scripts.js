@@ -792,10 +792,12 @@ const editarIngreso = (id, concept, value, obs) => {
 };
 
 // Function de editar egreso
-const editarEgreso = (id, idCategory, categoryName, value, obs) => {
+const editarEgreso = (id, idCategory, categoryName, value, month, obs) => {
   valueInputEditEgreso = d.querySelector(".editValueEgreso");
   obsInputEgreso = d.querySelector(".obsInputEgreso");
   let formEditEgreso = d.querySelector("#form-edit-egreso");
+  let valueEgresoHidden = d.querySelector(".editValueEgresoHidden");
+  let editMonthHidden = d.querySelector(".editMonthHidden");
   let catSelected = d.querySelector(`#${idCategory}`);
   let titleModal = d.querySelector(".infoCatEditing");
 
@@ -803,6 +805,8 @@ const editarEgreso = (id, idCategory, categoryName, value, obs) => {
   catSelected.setAttribute("selected", "");
   valueInputEditEgreso.value = value;
   obsInputEgreso.value = obs;
+  valueEgresoHidden.value = value;
+  editMonthHidden.value = month;
   formEditEgreso.action = `/guardar-edicion-de-egreso/${id}`;
 };
 
@@ -828,7 +832,7 @@ const eliminarIngreso = (id, concept) => {
 };
 
 // Function de eliminar egreso
-const eliminarEgreso = (id, categoryName) => {
+const eliminarEgreso = (id, categoryName, month, value) => {
   swal({
     title: `¿Querés eliminar el egreso de la categoría "${categoryName}"?`,
     icon: "warning",
@@ -842,7 +846,7 @@ const eliminarEgreso = (id, categoryName) => {
       });
       const swalBtn = d.querySelector(".swal-button");
       swalBtn.classList.add("hidden");
-      location.href = `/eliminar-egreso/${id}`;
+      location.href = `/eliminar-egreso/${id}&${categoryName}&${month}&${value}`;
     }
   });
 };
@@ -1180,15 +1184,16 @@ d.addEventListener("submit", (e) => {
     d.forms["form-agregar-obs-resumen"].submit();
   }
   // Form Editar observación de resumen mensual
-  if (e.target.matches("#form-editar-obs-resumen"))
+  if (e.target.matches("#form-editar-obs-resumen")) {
     swal({
       title: "Observación editada",
       icon: "success",
     });
-  const swalBtn = d.querySelector(".swal-button");
-  swalBtn.classList.add("hidden");
+    const swalBtn = d.querySelector(".swal-button");
+    swalBtn.classList.add("hidden");
 
-  d.forms["form-editar-obs-resumen"].submit();
+    d.forms["form-editar-obs-resumen"].submit();
+  }
 });
 
 // onChanges handler

@@ -45,7 +45,7 @@ router.get("/re-settings", ensureAuth, go.reSettings);
 
 router.get("/eliminar-ingreso/:id", ensureAuth, go.eliminarIngreso);
 
-router.get("/eliminar-egreso/:id", ensureAuth, go.eliminarEgreso);
+router.get("/eliminar-egreso/:id&:idCategory&:month&:value", ensureAuth, go.eliminarEgreso);
 
 router.get("/order-ingresos-by-day/:option", ensureAuth, go.orderIngresosByDay);
 
